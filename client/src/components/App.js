@@ -1,4 +1,8 @@
 import {useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import About from "./About";
+import Home from "./Home";
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,8 +15,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>BREWERY APP!</h1>
-      <h1>Page Count: {count}</h1>
+      <Routes>
+        <Route path="/" element={<Home count={count}/>}></Route>
+        <Route path="/about" element={<About />}></Route>
+      </Routes>
+
+      
     </div>
   );
 }

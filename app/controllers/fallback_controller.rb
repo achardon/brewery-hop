@@ -1,4 +1,4 @@
-class FallbackController < ApplicationController::Base64
+class FallbackController < ApplicationController::Base
     def index
         render file: 'public/index.html'
     end
