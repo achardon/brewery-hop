@@ -1,12 +1,13 @@
 import React from 'react'
+import Container from "@mui/material/Container";
+
 
 function Home( {count} ) {
   return (
-    <div>
-      Home
-      <h1>BREWERY APP!</h1>
+    <Container>
+      <h1>WELCOME TO THE BREWERY APP!</h1>
       <h1>Page Count: {count}</h1>
-    </div>
+    </Container>
   );
 }
 
