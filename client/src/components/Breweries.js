@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import BreweryCard from './BreweryCard';
+import Container from 'react-bootstrap/Container'
 
 function Breweries() {
 
@@ -13,7 +14,6 @@ function Breweries() {
     function handleSubmit(e) {
         e.preventDefault()
         setBreweries("")
-        console.log(search)
         const city = search.toLowerCase()
         fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
         .then(r => r.json())
@@ -23,8 +23,9 @@ function Breweries() {
     }
 
   return (
-    <div>
+    <Container style={{ padding: "40px" }}>
       <h1>Search Breweries By City</h1>
+      <br/>
       <form onSubmit={handleSubmit}>
         <label>
           Search:
@@ -32,7 +33,8 @@ function Breweries() {
         </label>
         <input type="submit" value="Submit" />
       </form>
-
+        <br/>
+        <br/>
       <h1>Results</h1>
       <div>{breweries? breweries.map(brewery => {
           return (
@@ -44,7 +46,7 @@ function Breweries() {
         }
       ) : null }
       </div>
-    </div>
+    </Container>
   );
 }
 

@@ -2,7 +2,7 @@ import {useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import About from "./About";
 import Home from "./Home";
-import Navbar from "./Navbar";
+import Navigation from "./Navigation";
 import Breweries from "./Breweries";
 
 
@@ -17,9 +17,9 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navigation />
       <Routes>
-        <Route path="/home" element={<Home count={count} />}></Route>
+        <Route path="/" element={<Home count={count} />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/breweries" element={<Breweries />}></Route>
       </Routes>
