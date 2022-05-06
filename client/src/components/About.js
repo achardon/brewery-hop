@@ -1,8 +1,14 @@
 import React from 'react'
+import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
 
 function About() {
   return (
-        <h1>About</h1>
+      <Container>
+
+          <h1>About</h1>
+          <Button variant="success">Success</Button>{' '}
+      </Container>
   )
 }
 
