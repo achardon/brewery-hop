@@ -2,7 +2,7 @@ import {useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import About from "./About";
 import Home from "./Home";
-import ResponsiveAppBar from "./ResponsiveAppBar";
+import Navbar from "./Navbar";
 import Breweries from "./Breweries";
 
 
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <ResponsiveAppBar />
+      <Navbar />
       <Routes>
         <Route path="/home" element={<Home count={count} />}></Route>
         <Route path="/about" element={<About />}></Route>

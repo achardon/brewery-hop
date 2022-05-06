@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container } from '@mui/material';
+import BreweryCard from './BreweryCard';
 
 function Breweries() {
 
@@ -23,7 +23,7 @@ function Breweries() {
     }
 
   return (
-    <Container maxWidth="lg">
+    <div>
       <h1>Search Breweries By City</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -36,14 +36,15 @@ function Breweries() {
       <h1>Results</h1>
       <div>{breweries? breweries.map(brewery => {
           return (
-            <li key={brewery.id}>
-              <a href={brewery.website_url}>{brewery.name}</a>
-            </li>
+              <BreweryCard key={brewery.id} brewery={brewery}/>
+            // <li key={brewery.id}>
+            //   <a href={brewery.website_url}>{brewery.name}</a>
+            // </li>
           );
         }
       ) : null }
       </div>
-    </Container>
+    </div>
   );
 }
 
