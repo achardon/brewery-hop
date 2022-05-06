@@ -2,6 +2,8 @@ import {useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import About from "./About";
 import Home from "./Home";
+import ResponsiveAppBar from "./ResponsiveAppBar";
+import Breweries from "./Breweries";
 
 
 function App() {
@@ -15,12 +17,12 @@ function App() {
 
   return (
     <div className="App">
+      <ResponsiveAppBar />
       <Routes>
-        <Route path="/" element={<Home count={count}/>}></Route>
+        <Route path="/home" element={<Home count={count} />}></Route>
         <Route path="/about" element={<About />}></Route>
+        <Route path="/breweries" element={<Breweries />}></Route>
       </Routes>
-
-      
     </div>
   );
 }

@@ -9,9 +9,14 @@ function Home( {count} ) {
     console.log(breweries)
 
   return (
-    <Container>
+    <Container maxWidth="lg" align="center" >
       <h1>WELCOME TO THE BREWERY APP!</h1>
-      <h1>Page Count: {count}</h1>
+      <img
+        src="http://www.piedmont.org/media/BlogImages/iStock_000049664402_470x260.jpg"
+        alt="beer"
+        height="600"
+      />
+      <h5>Page Count: {count}</h5>
     </Container>
   );
 }
