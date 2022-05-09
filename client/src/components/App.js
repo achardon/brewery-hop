@@ -4,6 +4,7 @@ import About from "./About";
 import Home from "./Home";
 import Navigation from "./Navigation";
 import Breweries from "./Breweries";
+import BucketList from "./BucketList";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home count={count} />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/breweries" element={<Breweries />}></Route>
+        <Route path="/bucket_list" element={<BucketList />}></Route>
       </Routes>
     </div>
   );
