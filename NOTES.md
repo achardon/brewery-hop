@@ -5,8 +5,9 @@ This app is designed for brewery enthusiasts who want to easily figure out which
 # MVP
 
 As a user (not signed in) I can:
--search a city
--see results of all breweries in that city as a list AND as a map (use Mapbox?)
+-search a city - DONE
+-see results of all breweries in that city as a list - DONE
+-AND as a map (use Mapbox?)
 -upon clicking on brewery:
     -see name, address, and website of brewery
     -read reviews about that brewery
