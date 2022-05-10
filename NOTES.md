@@ -8,6 +8,9 @@ As a user (not signed in) I can:
 -search a city - DONE
 -see results of all breweries in that city as a list - DONE
 -AND as a map (use Mapbox?)
+    -need to use geocoding to get coordinates of the search city
+    -need to also get coords of each brewery that gets returned
+    -add pin of each brewery to map after search
 -upon clicking on brewery:
     -see name, address, and website of brewery
     -read reviews about that brewery
@@ -87,6 +90,8 @@ Your product must use a React based frontend. Consult the following list for exa
 
 Resources:
 Mapbox: https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/
+Local search with the geocoding API: https://docs.mapbox.com/help/tutorials/local-search-geocoding-api/
 
 Mapbox questions:
--documentation says to import like this: import mapboxgl from '!mapbox-gl'; but when I do that, an error says "Line 6:1:  Unexpected '!' in '!mapbox-gl'. Do not use import syntax to configure webpack loaders  import/no-webpack-loader-syntax"... why  does it not work that way locally? When I push to heroku, it does not work and it says there is a transpiling error (which is what the documentation says will happen if you don't include the banger). 
+-documentation says to import like this: import mapboxgl from '!mapbox-gl'; but when I do that, an error says "Line 6:1:  Unexpected '!' in '!mapbox-gl'. Do not use import syntax to configure webpack loaders  import/no-webpack-loader-syntax"... why  does it not work that way locally? When I push to heroku, it does not work and it says there is a transpiling error (which is what the documentation says will happen if you don't include the banger). When I try to push to heroku with the banger, it says build failed and gives same error about the unexpected '!'
+

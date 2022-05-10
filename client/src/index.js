@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
