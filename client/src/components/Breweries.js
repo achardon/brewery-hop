@@ -7,6 +7,10 @@ import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
+
+//move map to separate component??
+
+
 function Breweries() {
   const [search, setSearch] = useState("");
   const [breweries, setBreweries] = useState("");
@@ -16,6 +20,8 @@ function Breweries() {
   const [lng, setLng] = useState(-72.6);
   const [lat, setLat] = useState(42.85);
   const [zoom, setZoom] = useState(9);
+
+  const coordinatesGeocoder = [-80, 20]
 
 //   console.log(lng);
 //   console.log(lat);
@@ -32,17 +38,16 @@ function Breweries() {
   useEffect(() => {
       if (map.current) return; // initialize map only once
       map.current = new mapboxgl.Map({
-          container: mapContainer.current,
-          style: "mapbox://styles/mapbox/streets-v11",
-          center: [lng, lat],
-          zoom: zoom,
+        container: mapContainer.current,
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [lng, lat],
+        zoom: zoom,
+      }).addControl(
+        new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl,
         })
-        .addControl(
-            new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
-                mapboxgl: mapboxgl,
-            })
-        );
+      );
     });
     
     useEffect(() => {
