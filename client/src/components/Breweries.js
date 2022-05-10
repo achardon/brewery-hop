@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import BreweryCard from './BreweryCard';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import mapboxgl from 'mapbox-gl';
 import "mapbox-gl/dist/mapbox-gl.css";
-
-
+mapboxgl.accessToken = "pk.eyJ1IjoiYWNoYXJkb24iLCJhIjoiY2wyeXZpaTlxMTlmdTNsbXZyMjZwMG56dCJ9.S92MJmwdJN1au1usa41_Aw";
 
 function Breweries() {
     
     const [search, setSearch] = useState("")
     const [breweries, setBreweries] = useState("")
+
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    const [lng, setLng] = useState(-70.9);
+    const [lat, setLat] = useState(42.35);
+    const [zoom, setZoom] = useState(9);
     
     const breweriesToDisplay = breweries ? breweries.map((brewery) => <BreweryCard key={brewery.id} brewery={brewery} /> ) : null;
     
@@ -30,14 +35,24 @@ function Breweries() {
         })
     }
     
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoiYWNoYXJkb24iLCJhIjoiY2wyeXZpaTlxMTlmdTNsbXZyMjZwMG56dCJ9.S92MJmwdJN1au1usa41_Aw";
-    // const map = new mapboxgl.Map({
-    //   container: "root", // container ID
-    //   style: "mapbox://styles/mapbox/streets-v11", // style URL
-    //   center: [-74.5, 40], // starting position [lng, lat]
-    //   zoom: 9, // starting zoom
-    // });
+    useEffect(() => {
+      if (map.current) return; // initialize map only once
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [lng, lat],
+        zoom: zoom,
+      });
+    });
+
+    useEffect(() => {
+      if (!map.current) return; // wait for map to initialize
+      map.current.on("move", () => {
+        setLng(map.current.getCenter().lng.toFixed(4));
+        setLat(map.current.getCenter().lat.toFixed(4));
+        setZoom(map.current.getZoom().toFixed(2));
+      });
+    });
 
   return (
     <Container style={{ padding: "40px" }}>
@@ -58,6 +73,13 @@ function Breweries() {
       <br />
       <br />
       <h1>Results</h1>
+      <div style={{ padding: "20px" }} >
+        <div
+          ref={mapContainer}
+          className="map-container"
+          style={{ height: "400px" }}
+        />
+      </div>
       <div className="d-flex flex-wrap">
         <Container>
           <Col>

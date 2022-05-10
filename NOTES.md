@@ -83,3 +83,7 @@ Your product must use a React based frontend. Consult the following list for exa
 [ ] Redux
 [ ] Custom CSS
 [ ] One significant refactor
+
+
+Resources:
+Mapbox: https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/
