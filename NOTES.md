@@ -87,3 +87,6 @@ Your product must use a React based frontend. Consult the following list for exa
 
 Resources:
 Mapbox: https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/
+
+Mapbox questions:
+-documentation says to import like this: import mapboxgl from '!mapbox-gl'; but when I do that, an error says "Line 6:1:  Unexpected '!' in '!mapbox-gl'. Do not use import syntax to configure webpack loaders  import/no-webpack-loader-syntax"... why  does it not work that way locally? When I push to heroku, it does not work and it says there is a transpiling error (which is what the documentation says will happen if you don't include the banger). 

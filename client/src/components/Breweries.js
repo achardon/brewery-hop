@@ -3,8 +3,7 @@ import BreweryCard from './BreweryCard';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import mapboxgl from 'mapbox-gl';
-import "mapbox-gl/dist/mapbox-gl.css";
+import mapboxgl from "!mapbox-gl";// import "mapbox-gl/dist/mapbox-gl.css";
 mapboxgl.accessToken = "pk.eyJ1IjoiYWNoYXJkb24iLCJhIjoiY2wyeXZpaTlxMTlmdTNsbXZyMjZwMG56dCJ9.S92MJmwdJN1au1usa41_Aw";
 
 function Breweries() {
