@@ -95,3 +95,16 @@ Local search with the geocoding API: https://docs.mapbox.com/help/tutorials/loca
 Mapbox questions:
 -documentation says to import like this: import mapboxgl from '!mapbox-gl'; but when I do that, an error says "Line 6:1:  Unexpected '!' in '!mapbox-gl'. Do not use import syntax to configure webpack loaders  import/no-webpack-loader-syntax"... why  does it not work that way locally? When I push to heroku, it does not work and it says there is a transpiling error (which is what the documentation says will happen if you don't include the banger). When I try to push to heroku with the banger, it says build failed and gives same error about the unexpected '!'
 
+Tried changing browserslist:
+took out in package.json:
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+and instead made it:
+  "browserslist": {
+    "production": [
+     "defaults, not ie 11"
+    ],

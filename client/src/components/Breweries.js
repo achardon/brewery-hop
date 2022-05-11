@@ -70,10 +70,11 @@ function Breweries() {
         console.log(data.features[0].center);
         setLng(data.features[0].center[0]);
         setLat(data.features[0].center[1]);
-        updateMap();
+        // updateMap();
       });
   }
 
+  // this function does not work yet.. how do you update the map manually by giving it coordinates?
   function updateMap() {
 
     map.current( () => {
