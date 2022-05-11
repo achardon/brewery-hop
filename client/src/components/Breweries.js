@@ -38,18 +38,19 @@ function Breweries() {
   //     .addTo(map); // Add the marker to the map
   
   useEffect(() => {
-      if (map.current) return; // initialize map only once
+      // if (map.current) return; // initialize map only once
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/streets-v11",
         center: [lng, lat],
         zoom: zoom,
-      }).addControl(
-        new MapboxGeocoder({
-          accessToken: mapboxgl.accessToken,
-          mapboxgl: mapboxgl,
-        })
-      );
+      })
+      // .addControl(
+      //   new MapboxGeocoder({
+      //     accessToken: mapboxgl.accessToken,
+      //     mapboxgl: mapboxgl,
+      //   })
+      // );
     }, [newSearch]);
     
     useEffect(() => {
