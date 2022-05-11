@@ -5,8 +5,9 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-
+// mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiYWNoYXJkb24iLCJhIjoiY2wyeXZpaTlxMTlmdTNsbXZyMjZwMG56dCJ9.S92MJmwdJN1au1usa41_Aw"
 
 //move map to separate component??
 
@@ -14,6 +15,7 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 function Breweries() {
   const [search, setSearch] = useState("");
   const [breweries, setBreweries] = useState("");
+  const [newSearch, setNewSearch] = useState(false)
 
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -48,7 +50,7 @@ function Breweries() {
           mapboxgl: mapboxgl,
         })
       );
-    });
+    }, [newSearch]);
     
     useEffect(() => {
         if (!map.current) return; // wait for map to initialize
@@ -75,6 +77,7 @@ function Breweries() {
   }
 
   // this function does not work yet.. how do you update the map manually by giving it coordinates?
+  //OR how do you get the input the user puts into the map to also fetch the breweries?
   function updateMap() {
 
     map.current( () => {
@@ -104,6 +107,7 @@ function Breweries() {
       .then((r) => r.json())
       .then((data) => {
         setBreweries(data);
+        setNewSearch(!newSearch)
       });
   }
 

@@ -108,3 +108,5 @@ and instead made it:
     "production": [
      "defaults, not ie 11"
     ],
+
+How do you hide the access token when deploying? Locally it works by having it in the .env file, but when I push to heroku it says "token is required..."
