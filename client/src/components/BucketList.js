@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { addBrewery } from "./breweriesSlice";
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
+import BreweryCard from './BreweryCard';
 
 function BucketList() {
 
@@ -22,7 +23,8 @@ function BucketList() {
       <button onClick={handleClick}>Add Brewery</button>
       <div>
         {breweries? breweries.map(brewery => {
-          return <li key={brewery.id}>{brewery.name}</li>
+          // return <li key={brewery.id}>{brewery.name}</li>
+          return <BreweryCard key={brewery.id} brewery={brewery} />
         }) : null }
       </div>
     </Container>

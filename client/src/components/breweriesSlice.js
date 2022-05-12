@@ -1,7 +1,5 @@
 import { v4 as uuid } from "uuid";
 
-// import { createSlice } from "@reduxjs/toolkit";
-
 //Action creators
 export const addBrewery = (brewery) => {
   return {
@@ -26,7 +24,7 @@ export default function breweriesReducer(state = initialState, action) {
       }
 }
 
-
+// below is what you would do with the redux toolkit
 // const breweriesSlice = createSlice({
 //   name: "breweries",
 //   initialState: {
