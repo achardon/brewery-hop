@@ -110,7 +110,7 @@ and instead made it:
     ],
 
 Outstanding questions:
-In the Home component, I am getting an error when I console.log(breweries), which is the strangest thing... what is happening?? When I do the same console.log inside a function there is no problem.
+In the Home component, I am getting an error when I console.log(breweries), which is the strangest thing... what is happening?? When I do the same console.log inside a function there is no problem. ('Uncaught TypeError: inputArgs[0].match is not a function')
 
 How do you hide the access token when deploying? Locally it works by having it in the .env file, but when I push to heroku it says "token is required..." so I put it back in to deploy (and it works) but now it's in the github repo... best practice here?
 -set up environmental variable with the token in the heroku website for that project

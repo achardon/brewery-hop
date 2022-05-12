@@ -11,12 +11,6 @@ function Home( {count} ) {
 
     const dispatch = useDispatch()
 
-    function handleClick() {
-      console.log(breweries)
-      dispatch(addBrewery('Five Threads'))
-      console.log(breweries)
-    }
-
     return (
     <Container style={{ padding: "40px" }}>
       <h1 style={{ padding: "10px" }}>WELCOME TO THE BREWERY HOP!</h1>
@@ -27,7 +21,6 @@ function Home( {count} ) {
         height="600"
       />
       {/* <h5>Page Count: {count}</h5> */}
-      <button  onClick={handleClick}>Add Brewery to Store</button>
     </Container>
   );
 }
