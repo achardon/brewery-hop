@@ -1,17 +1,44 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuid } from "uuid";
 
-const breweriesSlice = createSlice({
-  name: "breweries",
-  initialState: {
-    entities: ["Fogtown"],
-  },
-  reducers: {
-    breweryAdded(state, action) {
-      state.entities.push(action.payload);
-    },
-  },
-});
+// import { createSlice } from "@reduxjs/toolkit";
 
-export const { breweryAdded } = breweriesSlice.actions;
+//Action creators
+export const addBrewery = (brewery) => {
+  return {
+    type: "breweries/add",
+    payload: brewery
+  }
+}
 
-export default breweriesSlice.reducer;
+//Reducer
+const initialState = [];
+
+export default function breweriesReducer(state = initialState, action) {
+  switch( action.type ) {
+    case "breweries/add":
+      return [...state, {
+        id: uuid(),
+        name: action.payload
+      }]
+    
+    default:
+        return state;
+      }
+}
+
+
+// const breweriesSlice = createSlice({
+//   name: "breweries",
+//   initialState: {
+//     entities: ["Fogtown"],
+//   },
+//   reducers: {
+//     breweryAdded(state, action) {
+//       state.entities.push(action.payload);
+//     },
+//   },
+// });
+
+// export const { breweryAdded } = breweriesSlice.actions;
+
+// export default breweriesSlice.reducer;

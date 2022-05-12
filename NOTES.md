@@ -95,7 +95,7 @@ Local search with the geocoding API: https://docs.mapbox.com/help/tutorials/loca
 Mapbox questions:
 -documentation says to import like this: import mapboxgl from '!mapbox-gl'; but when I do that, an error says "Line 6:1:  Unexpected '!' in '!mapbox-gl'. Do not use import syntax to configure webpack loaders  import/no-webpack-loader-syntax"... why  does it not work that way locally? When I push to heroku, it does not work and it says there is a transpiling error (which is what the documentation says will happen if you don't include the banger). When I try to push to heroku with the banger, it says build failed and gives same error about the unexpected '!'
 
-Tried changing browserslist:
+This worked:
 took out in package.json:
   "browserslist": {
     "production": [
@@ -109,4 +109,32 @@ and instead made it:
      "defaults, not ie 11"
     ],
 
-How do you hide the access token when deploying? Locally it works by having it in the .env file, but when I push to heroku it says "token is required..."
+Outstanding questions:
+In the Home component, I am getting an error when I console.log(breweries), which is the strangest thing... what is happening?? When I do the same console.log inside a function there is no problem.
+
+How do you hide the access token when deploying? Locally it works by having it in the .env file, but when I push to heroku it says "token is required..." so I put it back in to deploy (and it works) but now it's in the github repo... best practice here?
+-set up environmental variable with the token in the heroku website for that project
+-get a different API key and make sure you don't push that one to the repo
+
+Redux - toolkit vs not? 
+-recommend not using it (so you can first learn a slightly less abstract way of using it)
+
+Redux - in all the labs we create and delete objects on the front end. With a rails backend, how does that work? Does the object first get created in redux and then sent to the backend or vice versa?
+-create first in rails, then update application state with redux
+-best use case for this case: keeping signed in user in application state
+
+Models - with regards to breweries, should I be creating a new brewery object on the backend with every search? If I want to enable reviews and brewery bucket lists... what are best practices there? Should I be adding breweries to brewery table every time a fetch occurs when a user searches a city?
+-use find or create in rails when creating a new brewery
+-accepts nested attributes for (creating brewery and review at the same time)
+-fetch breweries normally when there's a search, and then only look it up in the database when a user wants to know more or leave a review
+
+What does the review process look like? 
+Am I headed in the right direction for what this project should look like?
+What else should I be thinking about/including apart from my MVP?
+
+Rails 
+-authorization tool: cancancan, https://github.com/CanCanCommunity/cancancan
+-authentication: devise, https://rubygems.org/gems/devise, https://github.com/heartcombo/devise
+-speeding up rails application (indexing, pre-loading associations)
+-different serializer gem: fast json (developed my netflix)
+    -https://github.com/jsonapi-serializer/jsonapi-serializer
