@@ -4,62 +4,90 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import mapboxgl from "mapbox-gl";
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+// import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-
-//move map to separate component??
-
 
 function Breweries() {
   const [search, setSearch] = useState("");
   const [breweries, setBreweries] = useState("");
-  const [newSearch, setNewSearch] = useState(false)
+  const [newSearch, setNewSearch] = useState(false);
 
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-72.6);
-  const [lat, setLat] = useState(42.85);
-  const [zoom, setZoom] = useState(9);
+  const [lng, setLng] = useState(-72.5579);
+  const [lat, setLat] = useState(42.8509);
+  const [zoom, setZoom] = useState(12);
+  // const coordinatesGeocoder = [-80, 20];
 
-  const coordinatesGeocoder = [-80, 20]
+  // const marker = new mapboxgl.Marker().setLngLat([-72, 42]);
 
-//   console.log(lng);
-//   console.log(lat);
-
-//   const geocoder = new MapboxGeocoder({
-//     accessToken: mapboxgl.accessToken,
-//     mapboxgl: mapboxgl,
-//   });
-
-  //   const marker = new mapboxgl.Marker() // initialize a new marker
-  //     .setLngLat([-72, 42]) // Marker [lng, lat] coordinates
-  //     .addTo(map); // Add the marker to the map
-  
   useEffect(() => {
-      // if (map.current) return; // initialize map only once
-      map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: "mapbox://styles/mapbox/streets-v11",
-        center: [lng, lat],
-        zoom: zoom,
-      })
-      // .addControl(
-      //   new MapboxGeocoder({
-      //     accessToken: mapboxgl.accessToken,
-      //     mapboxgl: mapboxgl,
-      //   })
-      // );
-    }, [newSearch]);
-    
-    useEffect(() => {
-        if (!map.current) return; // wait for map to initialize
-        map.current.on("move", () => {
-            setLng(map.current.getCenter().lng.toFixed(4));
-            setLat(map.current.getCenter().lat.toFixed(4));
-            setZoom(map.current.getZoom().toFixed(2));
-        });
+    // if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [lng, lat],
+      zoom: zoom,
     });
+    // console.log(map.current)
+    const marker = new mapboxgl.Marker({color: 'black'}).setLngLat([lng, lat]).addTo(map.current);
+    // marker.addTo(map.current)
+    // include the below code to add a search bar to the map
+    // .addControl(
+    //   new MapboxGeocoder({
+    //     accessToken: mapboxgl.accessToken,
+    //     mapboxgl: mapboxgl,
+    //   })
+    // );
+  }, [newSearch]);
 
+  useEffect(() => {
+    if (!map.current) return; // wait for map to initialize
+    map.current.on("move", () => {
+      setLng(map.current.getCenter().lng.toFixed(4));
+      setLat(map.current.getCenter().lat.toFixed(4));
+      setZoom(map.current.getZoom().toFixed(2));
+    });
+  });
+
+  // const geojson = {
+  //   type: "FeatureCollection",
+  //   features: [
+  //     {
+  //       type: "Feature",
+  //       geometry: {
+  //         type: "Point",
+  //         coordinates: [-77.032, 38.913],
+  //       },
+  //       properties: {
+  //         title: "Mapbox",
+  //         description: "Washington, D.C.",
+  //       },
+  //     },
+  //     {
+  //       type: "Feature",
+  //       geometry: {
+  //         type: "Point",
+  //         coordinates: [-122.414, 37.776],
+  //       },
+  //       properties: {
+  //         title: "Mapbox",
+  //         description: "San Francisco, California",
+  //       },
+  //     },
+  //   ],
+  // };
+
+  // // add markers to map
+  // for (const feature of geojson.features) {
+  //   // create a HTML element for each feature
+  //   const el = document.createElement("div");
+  //   el.className = "marker";
+
+  //   // make a marker for each feature and add to the map
+  //   new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates)
+  //   // .addTo(map);
+  // }
 
   function setCoordinates(city) {
     //use mapbox's geocoding API to fetch coordinates of search city
@@ -68,23 +96,26 @@ function Breweries() {
     )
       .then((r) => r.json())
       .then((data) => {
-        console.log(data.features[0].center);
+        //set long and lat for search city so that map displays correct location
         setLng(data.features[0].center[0]);
         setLat(data.features[0].center[1]);
-        // updateMap();
       });
   }
 
-  // this function does not work yet.. how do you update the map manually by giving it coordinates?
-  //OR how do you get the input the user puts into the map to also fetch the breweries?
-  function updateMap() {
+  function addBreweryMarkers(data) {
+    data.map(brewery => {
+      fetch(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${brewery.name}.json?proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`
+      )
+      .then(r => r.json())
+      .then(data => {
+        console.log(data)
+        new mapboxgl.Marker()
+          .setLngLat([data.features[0].center[0], data.features[0].center[1]])
+          .addTo(map.current);
+      })
 
-    map.current( () => {
-        setLng(lng);
-        setLat(lat);
-        setZoom(map.current.getZoom().toFixed(2));
-    });
-
+    })
   }
 
   const breweriesToDisplay = breweries
@@ -106,7 +137,9 @@ function Breweries() {
       .then((r) => r.json())
       .then((data) => {
         setBreweries(data);
-        setNewSearch(!newSearch)
+        //change newSearch variable to trigger re-loading of new map with new coordinates
+        setNewSearch(!newSearch);
+        addBreweryMarkers(data)
       });
   }
 

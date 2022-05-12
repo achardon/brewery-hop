@@ -109,12 +109,10 @@ and instead made it:
      "defaults, not ie 11"
     ],
 
-Outstanding questions:
+# Outstanding questions:
 In the Home component, I am getting an error when I console.log(breweries), which is the strangest thing... what is happening?? When I do the same console.log inside a function there is no problem. ('Uncaught TypeError: inputArgs[0].match is not a function')
 
-How do you hide the access token when deploying? Locally it works by having it in the .env file, but when I push to heroku it says "token is required..." so I put it back in to deploy (and it works) but now it's in the github repo... best practice here?
--set up environmental variable with the token in the heroku website for that project
--get a different API key and make sure you don't push that one to the repo
+In Heroku, I passed in the access token to config vars but it's still not working and still says "An API key is required..."
 
 Redux - toolkit vs not? 
 -recommend not using it (so you can first learn a slightly less abstract way of using it)
@@ -127,10 +125,6 @@ Models - with regards to breweries, should I be creating a new brewery object on
 -use find or create in rails when creating a new brewery
 -accepts nested attributes for (creating brewery and review at the same time)
 -fetch breweries normally when there's a search, and then only look it up in the database when a user wants to know more or leave a review
-
-What does the review process look like? 
-Am I headed in the right direction for what this project should look like?
-What else should I be thinking about/including apart from my MVP?
 
 Rails 
 -authorization tool: cancancan, https://github.com/CanCanCommunity/cancancan
