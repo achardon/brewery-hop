@@ -90,8 +90,8 @@ function Breweries() {
   // }
 
   function setCoordinates(city, breweryData) {
-    console.log(city)
-    console.log(breweryData)
+    // console.log(city)
+    // console.log(breweryData)
     //use mapbox's geocoding API to fetch coordinates of search city
     fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${city}.json?access_token=${mapboxgl.accessToken}`
@@ -104,12 +104,12 @@ function Breweries() {
         setLng(longitude);
         setLat(latitude);
         addBreweryMarkers(breweryData, longitude, latitude);
-
       });
   }
 
   function addBreweryMarkers(data, longitude, latitude) {
-    console.log(data)
+    // console.log(data)
+    //there is some CSS for markers in index.css
     data.map(brewery => {
       if (brewery.longitude && brewery.latitude) {
           // console.log(typeof(brewery.longitude))
@@ -119,7 +119,13 @@ function Breweries() {
           //   parseFloat(brewery.latitude)]
           // );
         new mapboxgl.Marker()
-          .setLngLat([parseFloat(brewery.longitude), parseFloat(brewery.latitude)])
+          .setLngLat([parseFloat(brewery.longitude),parseFloat(brewery.latitude)])
+          .setPopup(
+            new mapboxgl.Popup({ offset: 25 }) // add popups
+              .setHTML(
+                `<h3>${brewery.name}</h3><p></p>`
+              )
+          )
           .addTo(map.current);
       }
       else if (brewery.street) {
@@ -128,9 +134,15 @@ function Breweries() {
         )
         .then(r => r.json())
         .then(data => {
-          console.log(data)
+          // console.log(data)
           new mapboxgl.Marker()
             .setLngLat([data.features[0].center[0], data.features[0].center[1]])
+            .setPopup(
+              new mapboxgl.Popup({ offset: 25 }) // add popups
+                .setHTML(
+                  `<h3>${brewery.name}</h3><p></p>`
+                )
+            )
             .addTo(map.current);
         })
       }
@@ -141,13 +153,18 @@ function Breweries() {
         )
         .then(r => r.json())
         .then(data => {
-          console.log(data)
+          // console.log(data)
           new mapboxgl.Marker()
             .setLngLat([data.features[0].center[0], data.features[0].center[1]])
+            .setPopup(
+              new mapboxgl.Popup({ offset: 25 }) // add popups
+                .setHTML(
+                  `<h3>${brewery.name}</h3><p></p>`
+                )
+            )
             .addTo(map.current);
         })
       }
-
     })
   }
 
@@ -164,6 +181,7 @@ function Breweries() {
   function handleSubmit(e) {
     e.preventDefault();
     setBreweries("");
+    setNewSearch(!newSearch);
     const city = search.toLowerCase();
     fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
     .then((r) => r.json())
@@ -172,7 +190,6 @@ function Breweries() {
       setBreweries(data);
       //change newSearch variable to trigger re-loading of new map with new coordinates
     });
-    setNewSearch(!newSearch);
   }
 
   return (
