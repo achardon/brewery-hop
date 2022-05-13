@@ -16,7 +16,7 @@ function Breweries() {
   const map = useRef(null);
   const [lng, setLng] = useState(-72.5579);
   const [lat, setLat] = useState(42.8509);
-  const [zoom, setZoom] = useState(12);
+  const [zoom, setZoom] = useState(9);
   // const coordinatesGeocoder = [-80, 20];
 
   // const marker = new mapboxgl.Marker().setLngLat([-72, 42]);
@@ -30,7 +30,7 @@ function Breweries() {
       zoom: zoom,
     });
     // console.log(map.current)
-    const marker = new mapboxgl.Marker({color: 'black'}).setLngLat([lng, lat]).addTo(map.current);
+    // const marker = new mapboxgl.Marker({color: 'black'}).setLngLat([lng, lat]).addTo(map.current);
     // marker.addTo(map.current)
     // include the below code to add a search bar to the map
     // .addControl(
@@ -89,7 +89,9 @@ function Breweries() {
   //   // .addTo(map);
   // }
 
-  function setCoordinates(city) {
+  function setCoordinates(city, breweryData) {
+    console.log(city)
+    console.log(breweryData)
     //use mapbox's geocoding API to fetch coordinates of search city
     fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${city}.json?access_token=${mapboxgl.accessToken}`
@@ -97,23 +99,54 @@ function Breweries() {
       .then((r) => r.json())
       .then((data) => {
         //set long and lat for search city so that map displays correct location
-        setLng(data.features[0].center[0]);
-        setLat(data.features[0].center[1]);
+        const longitude = data.features[0].center[0]
+        const latitude = data.features[0].center[1];
+        setLng(longitude);
+        setLat(latitude);
+        addBreweryMarkers(breweryData, longitude, latitude);
+
       });
   }
 
-  function addBreweryMarkers(data) {
+  function addBreweryMarkers(data, longitude, latitude) {
+    console.log(data)
     data.map(brewery => {
-      fetch(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${brewery.name}.json?proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`
-      )
-      .then(r => r.json())
-      .then(data => {
-        console.log(data)
+      if (brewery.longitude && brewery.latitude) {
+          // console.log(typeof(brewery.longitude))
+          // console.log(typeof(parseFloat(brewery.longitude)))
+          // console.log(
+          //   [parseFloat(brewery.longitude),
+          //   parseFloat(brewery.latitude)]
+          // );
         new mapboxgl.Marker()
-          .setLngLat([data.features[0].center[0], data.features[0].center[1]])
+          .setLngLat([parseFloat(brewery.longitude), parseFloat(brewery.latitude)])
           .addTo(map.current);
-      })
+      }
+      else if (brewery.street) {
+        fetch(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${brewery.street},${brewery.city}.json?proximity=${longitude},${latitude}&access_token=${mapboxgl.accessToken}`
+        )
+        .then(r => r.json())
+        .then(data => {
+          console.log(data)
+          new mapboxgl.Marker()
+            .setLngLat([data.features[0].center[0], data.features[0].center[1]])
+            .addTo(map.current);
+        })
+      }
+      else {
+        console.log('else', brewery.name)
+        fetch(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${brewery.name}.json?proximity=${longitude},${latitude}&access_token=${mapboxgl.accessToken}`
+        )
+        .then(r => r.json())
+        .then(data => {
+          console.log(data)
+          new mapboxgl.Marker()
+            .setLngLat([data.features[0].center[0], data.features[0].center[1]])
+            .addTo(map.current);
+        })
+      }
 
     })
   }
@@ -132,15 +165,14 @@ function Breweries() {
     e.preventDefault();
     setBreweries("");
     const city = search.toLowerCase();
-    setCoordinates(city);
     fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setBreweries(data);
-        //change newSearch variable to trigger re-loading of new map with new coordinates
-        setNewSearch(!newSearch);
-        addBreweryMarkers(data)
-      });
+    .then((r) => r.json())
+    .then((data) => {
+      setCoordinates(city, data);
+      setBreweries(data);
+      //change newSearch variable to trigger re-loading of new map with new coordinates
+    });
+    setNewSearch(!newSearch);
   }
 
   return (
