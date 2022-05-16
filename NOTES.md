@@ -91,6 +91,10 @@ Your product must use a React based frontend. Consult the following list for exa
 Resources:
 Mapbox: https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/
 Local search with the geocoding API: https://docs.mapbox.com/help/tutorials/local-search-geocoding-api/
+https://docs.mapbox.com/api/search/geocoding/
+Add custom markers with popups: https://docs.mapbox.com/help/tutorials/custom-markers-gl-js/?q=.addTo&size=n_10_n
+react-map-gl: https://visgl.github.io/react-map-gl/docs/get-started/tips-and-tricks
+mapbox react examples: https://github.com/mapbox/mapbox-react-examples
 
 Mapbox questions:
 -documentation says to import like this: import mapboxgl from '!mapbox-gl'; but when I do that, an error says "Line 6:1:  Unexpected '!' in '!mapbox-gl'. Do not use import syntax to configure webpack loaders  import/no-webpack-loader-syntax"... why  does it not work that way locally? When I push to heroku, it does not work and it says there is a transpiling error (which is what the documentation says will happen if you don't include the banger). When I try to push to heroku with the banger, it says build failed and gives same error about the unexpected '!'
@@ -110,6 +114,8 @@ and instead made it:
     ],
 
 # Outstanding questions:
+How to make sure map re-renders after submitting search, currently there is a lag with state updating and the map only refreshes if you click submit twice
+
 In the Home component, I am getting an error when I console.log(breweries), which is the strangest thing... what is happening?? When I do the same console.log inside a function there is no problem. ('Uncaught TypeError: inputArgs[0].match is not a function')
 
 In Heroku, I passed in the access token to config vars but it's still not working and still says "An API key is required..."
@@ -127,8 +133,47 @@ Models - with regards to breweries, should I be creating a new brewery object on
 -fetch breweries normally when there's a search, and then only look it up in the database when a user wants to know more or leave a review
 
 Rails 
--authorization tool: cancancan, https://github.com/CanCanCommunity/cancancan
 -authentication: devise, https://rubygems.org/gems/devise, https://github.com/heartcombo/devise
+-authorization tool: cancancan, https://github.com/CanCanCommunity/cancancan
 -speeding up rails application (indexing, pre-loading associations)
 -different serializer gem: fast json (developed my netflix)
     -https://github.com/jsonapi-serializer/jsonapi-serializer
+
+
+Devise 
+instructions in console upon installing:
+
+Depending on your application's configuration some manual setup may be required:
+
+  1. Ensure you have defined default url options in your environments files. Here
+     is an example of default_url_options appropriate for a development environment
+     in config/environments/development.rb:
+
+       config.action_mailer.default_url_options = { host: 'localhost', port: 3000 } - DONE
+
+     In production, :host should be set to the actual host of your application. - NOT DONE
+
+     * Required for all applications. *
+
+  2. Ensure you have defined root_url to *something* in your config/routes.rb.
+     For example:
+
+       root to: "home#index"
+     
+     * Not required for API-only Applications * (therefore I don't need it?)
+
+  3. Ensure you have flash messages in app/views/layouts/application.html.erb.
+     For example:
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+     * Not required for API-only Applications *
+
+  4. You can copy Devise views (for customization) to your app by running:
+
+       rails g devise:views
+       
+     * Not required *
+
+documentation: https://rubydoc.info/github/heartcombo/devise

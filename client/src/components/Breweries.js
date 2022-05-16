@@ -22,7 +22,8 @@ function Breweries() {
   // const marker = new mapboxgl.Marker().setLngLat([-72, 42]);
 
   useEffect(() => {
-    // if (map.current) return; // initialize map only once
+    // if (map.current) return; // initialize map only once 
+    console.log('useEffect running again')
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -105,11 +106,22 @@ function Breweries() {
         setLat(latitude);
         addBreweryMarkers(breweryData, longitude, latitude);
       });
+      setNewSearch(!newSearch); //very crucial where this lives as this is the dependency variable for the useEffect to render a new map
   }
+
+  // function updateMap() {
+  //   map.current = new mapboxgl.Map({
+  //     container: mapContainer.current,
+  //     style: "mapbox://styles/mapbox/streets-v11",
+  //     center: [lng, lat],
+  //     zoom: zoom,
+  //   });
+  // }
 
   function addBreweryMarkers(data, longitude, latitude) {
     // console.log(data)
     //there is some CSS for markers in index.css
+
     data.map(brewery => {
       if (brewery.longitude && brewery.latitude) {
           // console.log(typeof(brewery.longitude))
@@ -118,6 +130,7 @@ function Breweries() {
           //   [parseFloat(brewery.longitude),
           //   parseFloat(brewery.latitude)]
           // );
+          console.log(brewery.name, 'long, lat')
         new mapboxgl.Marker()
           .setLngLat([parseFloat(brewery.longitude),parseFloat(brewery.latitude)])
           .setPopup(
@@ -181,7 +194,7 @@ function Breweries() {
   function handleSubmit(e) {
     e.preventDefault();
     setBreweries("");
-    setNewSearch(!newSearch);
+    // setNewSearch(!newSearch);
     const city = search.toLowerCase();
     fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
     .then((r) => r.json())
@@ -193,12 +206,17 @@ function Breweries() {
   }
 
   return (
-    <Container style={{ padding: "40px" }}>
-      <h1>Search Breweries By City</h1>
-      <br />
-      <form onSubmit={handleSubmit}>
+    <>
+      <div style={{ padding: "0px" }}>
+        <div
+          ref={mapContainer}
+          className="map-container"
+          style={{ height: "600px" }}
+        />
+      </div>
+      <form onSubmit={handleSubmit} style={{padding: "10px", textAlign: "center"}}>
         <label>
-          Search:
+          Search Breweries by City:
           <input
             type="text"
             name="search"
@@ -208,16 +226,11 @@ function Breweries() {
         </label>
         <input type="submit" value="Submit" />
       </form>
+    {/* <Container style={{ padding: "10px" }}> */}
+      {/* <h1>Search Breweries By City</h1> */}
       <br />
       <br />
       <h1>Results</h1>
-      <div style={{ padding: "20px" }}>
-        <div
-          ref={mapContainer}
-          className="map-container"
-          style={{ height: "400px" }}
-        />
-      </div>
       <div className="d-flex flex-wrap">
         <Container>
           <Col>
@@ -227,8 +240,9 @@ function Breweries() {
           </Col>
         </Container>
       </div>
-    </Container>
-  );
+    {/* </Container> */}
+  </>
+  )
 }
 
 export default Breweries;
