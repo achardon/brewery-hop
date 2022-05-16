@@ -1,0 +1,2 @@
+class WishlistBreweriesController < ApplicationController
+end

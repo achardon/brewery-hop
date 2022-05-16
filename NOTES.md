@@ -177,3 +177,7 @@ Depending on your application's configuration some manual setup may be required:
      * Not required *
 
 documentation: https://rubydoc.info/github/heartcombo/devise
+
+
+Users
+Alessandra, beerplease, achardon@ucla.edu
