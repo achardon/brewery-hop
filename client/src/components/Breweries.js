@@ -131,6 +131,7 @@ function Breweries() {
           //   parseFloat(brewery.latitude)]
           // );
           console.log(brewery.name, 'long, lat')
+          console.log(brewery);
         new mapboxgl.Marker()
           .setLngLat([parseFloat(brewery.longitude),parseFloat(brewery.latitude)])
           .setPopup(
