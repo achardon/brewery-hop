@@ -12,16 +12,19 @@ function Home( {count} ) {
     const dispatch = useDispatch()
 
     return (
-    <Container style={{ padding: "40px" }}>
-      <h1 style={{ padding: "10px" }}>WELCOME TO THE BREWERY HOP!</h1>
-      {/* <p>{breweries[0]}</p> */}
-      <img
-        src="https://www.piedmont.org/media/BlogImages/iStock_000049664402_470x260.jpg"
-        alt="beer"
-        height="600"
-      />
-      {/* <h5>Page Count: {count}</h5> */}
-    </Container>
+    <>
+        <img
+          src="https://www.piedmont.org/media/BlogImages/iStock_000049664402_470x260.jpg"
+          alt="beer"
+          // height="700"
+          width="100%"
+        />
+      <Container style={{ padding: "10px" }}>
+        <h1 style={{ padding: "10px", textAlign: "center" }}>WELCOME TO THE BREWERY HOP!</h1>
+        {/* <p>{breweries[0]}</p> */}
+        {/* <h5>Page Count: {count}</h5> */}
+      </Container>
+    </>
   );
 }
 

@@ -5,6 +5,8 @@ import Home from "./Home";
 import Navigation from "./Navigation";
 import Breweries from "./Breweries";
 import BucketList from "./BucketList";
+import Login from "./Login";
+import Signup from "./Signup";
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/breweries" element={<Breweries />}></Route>
         <Route path="/bucket_list" element={<BucketList />}></Route>
+        <Route path="/log_in" element={<Login />}></Route>
+        <Route path="/sign_up" element={<Signup />}></Route>
       </Routes>
     </div>
   );
