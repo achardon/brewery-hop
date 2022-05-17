@@ -98,6 +98,7 @@ mapbox react examples: https://github.com/mapbox/mapbox-react-examples
 
 Mapbox questions:
 -documentation says to import like this: import mapboxgl from '!mapbox-gl'; but when I do that, an error says "Line 6:1:  Unexpected '!' in '!mapbox-gl'. Do not use import syntax to configure webpack loaders  import/no-webpack-loader-syntax"... why  does it not work that way locally? When I push to heroku, it does not work and it says there is a transpiling error (which is what the documentation says will happen if you don't include the banger). When I try to push to heroku with the banger, it says build failed and gives same error about the unexpected '!'
+Final Projects Presentation: https://www.youtube.com/watch?v=URpa2-CIsD4 (minute 17 - project with mapbox)
 
 This worked:
 took out in package.json:

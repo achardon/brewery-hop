@@ -26,7 +26,7 @@ function Login({ user, setUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/login", {
+    fetch("/users/sign_in", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ function Login({ user, setUser }) {
 
       <Container style={{ padding: "40px" }} className="text-center">
         <h3 style={{ padding: "10px" }}>Don't have an account?</h3>
-        <Button onClick={handleCreateAccount} variant="info">
+        <Button onClick={handleCreateAccount} variant="success">
           Create Account
         </Button>
       </Container>
