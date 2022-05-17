@@ -23,7 +23,7 @@ function BreweryCard( {brewery} ) {
       console.log(data)
       const selectedBrewery = data.find(b => b.name === brewery.name)
       console.log(selectedBrewery)
-      console.log(selectedBrewery.reviews)
+      // console.log(selectedBrewery.reviews)
       if (selectedBrewery) {
         setReviews(selectedBrewery.reviews)
       }
@@ -33,7 +33,7 @@ function BreweryCard( {brewery} ) {
 
   return (
     <Container style={{ padding: "10px" }}>
-      <Card style={{ width: "18rem" }}>
+      <Card bg="warning" style={{ width: "18rem" }}>
         <Card.Body>
           <Card.Title>{brewery.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
