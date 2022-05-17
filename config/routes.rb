@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   resources :wishlist_breweries
   resources :breweries
   # resources :users

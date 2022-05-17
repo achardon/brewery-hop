@@ -3,8 +3,8 @@ import React from 'react'
 function ReviewsContainer( {reviews} ) {
   return (
     <div>
-      {reviews.count > 0 ? (
-        reviews.map((review) => <p>{review}</p>)
+      {reviews ? (
+        reviews.map((review) => <p key={review.id}>{review.comment}</p>)
       ) : (
         <p>No reviews available</p>
       )}

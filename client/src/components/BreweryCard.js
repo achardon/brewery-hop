@@ -6,9 +6,10 @@ import ReviewsContainer from './ReviewsContainer';
 
 function BreweryCard( {brewery} ) {
 
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState('')
   const [showReviews, setShowReviews] = useState(false)
   console.log(reviews)
+  console.log(brewery.name)
 
   function address(brewery) {
     return `${brewery.street}, ${brewery.city}, ${brewery.state}`
@@ -16,7 +17,19 @@ function BreweryCard( {brewery} ) {
 
   function handleClick() {
     setShowReviews(!showReviews)
-  }
+    fetch(`/breweries`)
+    .then(r => r.json())
+    .then(data => {
+      console.log(data)
+      const selectedBrewery = data.find(b => b.name === brewery.name)
+      console.log(selectedBrewery)
+      console.log(selectedBrewery.reviews)
+      if (selectedBrewery) {
+        setReviews(selectedBrewery.reviews)
+      }
+    })
+    }
+  
 
   return (
     <Container style={{ padding: "10px" }}>
