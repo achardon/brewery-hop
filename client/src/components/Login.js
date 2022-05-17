@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login({ user, setUser }) {
   const [form, setForm] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -35,9 +35,10 @@ function Login({ user, setUser }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((data) => {
+            console.log(data)
           setUser(data);
           setForm({
-            username: "",
+            email: "",
             password: "",
           });
         });
@@ -57,13 +58,13 @@ function Login({ user, setUser }) {
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Username</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control
             type="text"
-            name="username"
-            placeholder="Enter Username"
+            name="email"
+            placeholder="Enter Email"
             onChange={handleChange}
-            value={form.username}
+            value={form.email}
           />
         </Form.Group>
 

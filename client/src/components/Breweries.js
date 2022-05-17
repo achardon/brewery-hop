@@ -40,7 +40,7 @@ function Breweries() {
     //     mapboxgl: mapboxgl,
     //   })
     // );
-  }, [newSearch]);
+  }, []);
 
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
@@ -102,6 +102,12 @@ function Breweries() {
         //set long and lat for search city so that map displays correct location
         const longitude = data.features[0].center[0]
         const latitude = data.features[0].center[1];
+        map.current = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: "mapbox://styles/mapbox/streets-v11",
+          center: [longitude, latitude],
+          zoom: zoom,
+        });
         setLng(longitude);
         setLat(latitude);
         addBreweryMarkers(breweryData, longitude, latitude);
