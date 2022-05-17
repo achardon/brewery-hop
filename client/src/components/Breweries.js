@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import mapboxgl from "mapbox-gl";
+import Button from 'react-bootstrap/esm/Button';
 // import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -22,7 +23,7 @@ function Breweries() {
   // const marker = new mapboxgl.Marker().setLngLat([-72, 42]);
 
   useEffect(() => {
-    // if (map.current) return; // initialize map only once 
+    if (map.current) return; // initialize map only once 
     console.log('useEffect running again')
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -136,17 +137,22 @@ function Breweries() {
           //   [parseFloat(brewery.longitude),
           //   parseFloat(brewery.latitude)]
           // );
-          console.log(brewery.name, 'long, lat')
-          console.log(brewery);
-        new mapboxgl.Marker()
-          .setLngLat([parseFloat(brewery.longitude),parseFloat(brewery.latitude)])
+          // console.log(brewery.name, 'long, lat')
+          // console.log(brewery);
+        const marker = new mapboxgl.Marker()
+          .setLngLat([
+            parseFloat(brewery.longitude),
+            parseFloat(brewery.latitude),
+          ])
           .setPopup(
             new mapboxgl.Popup({ offset: 25 }) // add popups
               .setHTML(
-                `<h3>${brewery.name}</h3><p></p>`
+                `<h3>${brewery.name}</h3><button>More Info</button>`
               )
           )
           .addTo(map.current);
+          //maybe use this to then highlight the brewery card??
+          marker.getElement().addEventListener("click", () => console.log(brewery.id))
       }
       else if (brewery.street) {
         fetch(
@@ -167,7 +173,7 @@ function Breweries() {
         })
       }
       else {
-        console.log('else', brewery.name)
+        // console.log('else', brewery.name)
         fetch(
             `https://api.mapbox.com/geocoding/v5/mapbox.places/${brewery.name}.json?proximity=${longitude},${latitude}&access_token=${mapboxgl.accessToken}`
         )

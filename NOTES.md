@@ -7,7 +7,7 @@ This app is designed for brewery enthusiasts who want to easily figure out which
 As a user (not signed in) I can:
 -search a city - DONE
 -see results of all breweries in that city as a list - DONE
--AND as a map (use Mapbox?)
+-AND as a map - DONE
     -need to use geocoding to get coordinates of the search city
     -need to also get coords of each brewery that gets returned
     -add pin of each brewery to map after search
