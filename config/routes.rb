@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :wishlist_breweries
   resources :breweries
-  resources :users
+  # resources :users
   # devise_for :users, controllers: {
   #       sessions: 'users/sessions'
   #     }

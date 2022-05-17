@@ -4,7 +4,7 @@ import { addBrewery } from './breweriesSlice';
 import Container from "react-bootstrap/Container"
 
 
-function Home( {count} ) {
+function Home( ) {
 
     const breweries = useSelector(state => state.breweries)
     // console.log(breweries) <-- this throws an error... how is that possible??

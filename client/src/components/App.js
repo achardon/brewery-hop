@@ -10,19 +10,12 @@ import Signup from "./Signup";
 
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
 
   return (
     <div className="App">
       <Navigation />
       <Routes>
-        <Route path="/" element={<Home count={count} />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/breweries" element={<Breweries />}></Route>
         <Route path="/bucket_list" element={<BucketList />}></Route>
