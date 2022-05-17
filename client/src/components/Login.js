@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
 
-function Login({ user, setUser }) {
+function Login() {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -33,15 +33,17 @@ function Login({ user, setUser }) {
       },
       body: JSON.stringify(form),
     }).then((r) => {
+        console.log('.then')
       if (r.ok) {
-        r.json().then((data) => {
-            console.log(data)
-          setUser(data);
+        r.json()
+        .then((data) => {
+          console.log(data)
           setForm({
             email: "",
             password: "",
           });
         });
+        console.log('success')
         navigate(`/`);
       } else {
         r.json().then((error) => {
