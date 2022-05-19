@@ -43,7 +43,6 @@ function Login() {
             password: "",
           });
         });
-        console.log('success')
         navigate(`/`);
       } else {
         r.json().then((error) => {

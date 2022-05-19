@@ -179,6 +179,8 @@ Depending on your application's configuration some manual setup may be required:
 
 documentation: https://rubydoc.info/github/heartcombo/devise
 
+Route to see all routes on backend server: http://localhost:3000/rails/info/routes
+
 
 Users
 Alessandra, beerplease, achardon@ucla.edu
