@@ -7,15 +7,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource
   def create
-    super do 
-      render json: {user: current_user}.to_json and return
-    end
+    byebug
+    super 
+    # do 
+    #   render json: {user: current_user}.to_json and return
+    # end
   end
 
   # GET /resource/edit
@@ -43,6 +45,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # protected
+
+  private
+
+  def respond_with(resource, _opts = {})
+    render json: resource
+  end
+
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
