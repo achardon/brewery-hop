@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { addBrewery } from './breweriesSlice';
 import Container from "react-bootstrap/Container"
@@ -10,7 +10,22 @@ function Home( ) {
     // console.log(breweries) <-- this throws an error... how is that possible??
 
     const dispatch = useDispatch()
+    const user = useSelector(state => state.users)
+    console.log(user)
 
+    useEffect(() => {
+      //this route currently just returns the current_user to test out login functionality
+      fetch("/breweries")
+      .then(r => r.json())
+      .then(data => console.log(data))
+    }, [])
+
+    function handleLogOut() {
+      fetch("/logout", {
+        method: "DELETE"
+      })
+      .then(data => console.log(data))
+    }
   //   return (
   //   <>
   //       {/* <img
@@ -41,6 +56,7 @@ function Home( ) {
       </h1>
       {/* <p>{breweries[0]}</p> */}
       {/* <h5>Page Count: {count}</h5> */}
+      <button onClick={handleLogOut}>Log Out</button>
     </Container>
   );
 

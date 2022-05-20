@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addUser } from "./usersSlice";
 
 function Login() {
   const [form, setForm] = useState({
@@ -13,6 +15,11 @@ function Login() {
 
   const [errors, setErrors] = useState([]);
   const [showErrors, setShowErrors] = useState(true);
+
+  const user = useSelector(state => state.users)
+  const dispatch = useDispatch()
+
+  console.log(user)
 
   let navigate = useNavigate();
 
@@ -38,6 +45,9 @@ function Login() {
         r.json()
         .then((data) => {
           console.log(data)
+          console.log("Welcome", data.data.email, "!!")
+          dispatch(addUser(data.data))
+          console.log(user)
           setForm({
             email: "",
             password: "",
