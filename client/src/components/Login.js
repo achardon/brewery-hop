@@ -26,12 +26,12 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/users/sign_in", {
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify({user: form}),
     }).then((r) => {
         console.log('.then')
       if (r.ok) {
