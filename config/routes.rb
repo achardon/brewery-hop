@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :reviews
-  resources :wishlist_breweries
+  # resources :reviews
+  # resources :wishlist_breweries
   resources :breweries
   # resources :users
   # devise_for :users, controllers: {
@@ -8,11 +8,11 @@ Rails.application.routes.draw do
   #     }
 
   #from this blog: https://abletech.nz/resource/hi-im-kate/
-  root :to => 'home#index'
+  # root :to => 'home#index'
   # devise_for :users
   # , controllers: { registrations: 'registrations', sessions: 'sessions' }
 
-  devise_for :users 
+  # devise_for :users 
   # path: '', path_names: {
   #   sign_in: 'sign_in',
   #   sign_out: 'logout',
