@@ -2,20 +2,23 @@
 
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
+  skip_before_action :authenticate_user!
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super do
-  #     render json: {testuser: current_user}.to_json and return
-  #   end
-  # end
+  def new
+    # super do
+    #   render json: {testuser: current_user}.to_json and return
+    # end
+    byebug
+    super
+  end
 
   # POST /resource/sign_in
-  # def create
-  #   # byebug
-  #   super
-  # end
+  def create
+    byebug
+    super
+  end
 
   # def create
   #   self.resource = warden.authenticate!(auth_options)
@@ -36,15 +39,20 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
-    render json: resource
+    # render json: resource
+    render json: {
+        status: {code: 200, message: 'Logged in sucessfully.'},
+        data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
+      }, status: :ok
   end
 
-  def respond_to_on_destroy
-    head :no_content
-  end
+
+  # def respond_to_on_destroy
+  #   head :no_content
+  # end
 
   # # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+  end
 end
