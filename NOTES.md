@@ -185,3 +185,4 @@ Route to see all routes on backend server: http://localhost:3000/rails/info/rout
 Users
 achardon@ucla.edu, yesplease
 hagartypatrick@gmail.com, beeroclock
+example@ucla.edu, example
