@@ -17,7 +17,9 @@ function Home( ) {
       //this route currently just returns the current_user to test out login functionality
       fetch("/breweries")
       .then(r => r.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data)
+      })
     }, [])
 
     function handleLogOut() {
