@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -22,6 +22,21 @@ function Login() {
 //   console.log(user)
 
   let navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("/login", {
+        method: "POST"
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.data.email) {
+            console.log(data.data.email)
+        }
+        else {
+            console.log("error", data)
+        }
+    })
+  }, [])
 
   function handleCreateAccount() {
     navigate(`/sign_up`);
@@ -47,7 +62,6 @@ function Login() {
           console.log(data)
           console.log("Welcome", data.data.email, "!!")
           dispatch(addUser(data.data))
-          console.log(user)
           setForm({
             email: "",
             password: "",

@@ -27,13 +27,6 @@ function Home( ) {
       })
     }, [])
 
-    function handleLogOut() {
-      //the error message you're getting is for port 4000 but it should be a fetch request to the backend at 3000, but also it's still correctly logging the user out.
-      fetch("/logout", {
-        method: "DELETE"
-      })
-      .then(data => console.log(data))
-    }
   //   return (
   //   <>
   //       {/* <img
@@ -64,7 +57,6 @@ function Home( ) {
       </h1>
       {/* <p>{breweries[0]}</p> */}
       {/* <h5>Page Count: {count}</h5> */}
-      <button onClick={handleLogOut}>Log Out</button>
     </Container>
   );
 
