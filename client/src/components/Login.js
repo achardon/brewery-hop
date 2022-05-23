@@ -19,7 +19,7 @@ function Login() {
   const user = useSelector(state => state.users)
   const dispatch = useDispatch()
 
-  console.log(user)
+//   console.log(user)
 
   let navigate = useNavigate();
 

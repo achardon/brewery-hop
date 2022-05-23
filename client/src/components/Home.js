@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { addBrewery } from './breweriesSlice';
 import Container from "react-bootstrap/Container"
+import { addUser } from "./usersSlice";
+
 
 
 function Home( ) {
@@ -11,7 +13,7 @@ function Home( ) {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.users)
-    console.log(user)
+    // console.log(user)
 
     useEffect(() => {
       //this route currently just returns the current_user to test out login functionality
@@ -19,6 +21,9 @@ function Home( ) {
       .then(r => r.json())
       .then(data => {
         console.log(data)
+        // if (data) {
+        //   dispatch(addUser(data));
+        // }
       })
     }, [])
 
