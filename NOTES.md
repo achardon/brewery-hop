@@ -115,7 +115,7 @@ and instead made it:
     ],
 
 # Outstanding questions:
-How to make sure map re-renders after submitting search, currently there is a lag with state updating and the map only refreshes if you click submit twice
+Upon log in, it doesn't immediately update in the navbar... how do I make sure the navbar re-renders? I tried doing a useSelector within the useEffect to access state but that is not allowed.
 
 In the Home component, I am getting an error when I console.log(breweries), which is the strangest thing... what is happening?? When I do the same console.log inside a function there is no problem. ('Uncaught TypeError: inputArgs[0].match is not a function')
 

@@ -11,15 +11,35 @@ import { removeUser } from "./usersSlice";
 
 function Navigation() {
 
+  //problem: upon log in, it doesn't immediately update in the navbar... how do I make sure the navbar re-renders? I tried doing a useSelector within the useEffect to access state but that is not allowed.
   let navigate = useNavigate()
 
-  // const [user, setUser] = useState('')
-  const userArray = useSelector((state) => state.users);
-  const user = userArray[0]
+  const [user, setUser] = useState('')
+  //can't use useSelector within useEffect??
+  // useEffect(() => {
+    // const userArray = useSelector((state) => state.users);
+    // const user = userArray[0]
+  // }, [])
 
   console.log(user)
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    fetch("/login", {
+      method: "POST",
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.data.email) {
+          console.log(data.data.email);
+          setUser(data.data.email)
+        } else {
+          console.log("error", data);
+        }
+      });
+    }, []);
+
 
 
   // useEffect(() => {
@@ -44,6 +64,7 @@ function Navigation() {
   function handleLogOut() {
     console.log("log out");
     dispatch(removeUser(user))
+    setUser("")
     //the error message you're getting is for port 4000 but it should be a fetch request to the backend at 3000, but also it's still correctly logging the user out.
 
     fetch("/logout", {
@@ -69,7 +90,7 @@ function Navigation() {
           <Navbar.Collapse className="justify-content-end">
             {user ? (
               <Navbar.Text>
-                Signed in as: <a href="#login">{user.email}</a>
+                Signed in as: <a href="#login">{user}</a>
               </Navbar.Text>
             ) : null}
             <div style={{ padding: "10px" }}>
