@@ -20,15 +20,9 @@ function BucketList() {
 
   // const dispatch = useDispatch();
 
-  function handleClick() {
-    // dispatch(addBrewery("Five Threads"));
-    // console.log(breweries)
-  }
-
   return (
     <Container style={{ padding: "40px" }}>
       <h1>Brewery Bucket List</h1>
-      <button onClick={handleClick}>Add Brewery</button>
       <div>
         {breweries? breweries.map(brewery => {
           // return <li key={brewery.id}>{brewery.name}</li>

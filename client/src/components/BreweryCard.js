@@ -39,7 +39,7 @@ function BreweryCard( {brewery} ) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({name: brewery.name, address: `${brewery.street}, ${brewery.city}, ${brewery.state}`, gps_coords: [brewery.longitude, brewery.latitude], website: brewery.website_url, user_id: 1})
+      body: JSON.stringify({name: brewery.name, street: brewery.street, city: brewery.city, state: brewery.state, longitude: brewery.longitude, latitude: brewery.latitude, website_url: brewery.website_url, user_id: 1})
     })
     .then(r => r.json())
     .then(data => console.log(data))

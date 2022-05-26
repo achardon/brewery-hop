@@ -5,7 +5,7 @@ class WishlistBreweriesController < ApplicationController
     end
 
     def create
-        brewery = Brewery.find_or_create_by(name: params[:name], address: params[:address], gps_coords: params[:gps_coords], website: params[:website])
+        brewery = Brewery.find_or_create_by(name: params[:name], street: params[:street], city: params[:city], state: params[:state], longitude: params[:longitude], latitude: params[:latitude], website_url: params[:website_url])
         wish = WishlistBrewery.create(user_id: params[:user_id], brewery_id: brewery.id)
         render json: wish
     end

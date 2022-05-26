@@ -1,3 +1,3 @@
 class BrewerySerializer < ActiveModel::Serializer
-  attributes :id, :name, :address, :gps_coords, :website, :reviews
+  attributes :id, :name, :street, :city, :state, :longitude, :latitude, :website_url, :reviews
 end
