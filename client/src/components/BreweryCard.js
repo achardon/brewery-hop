@@ -8,8 +8,6 @@ function BreweryCard( {brewery} ) {
 
   const [reviews, setReviews] = useState('')
   const [showReviews, setShowReviews] = useState(false)
-    // console.log(reviews)
-    // console.log(brewery.name)
   
   
 
@@ -43,7 +41,10 @@ function BreweryCard( {brewery} ) {
     })
     .then(r => r.json())
     .then(data => console.log(data))
+    //should this navigate to Bucket List page?
   }
+
+  //Need to change brewery card so that if it is a wishlist item it doesn't show the heart, or maybe it has the option of removing it? Also if a brewery is already on the wishlist it should not be added again.
 
   return (
     <Container style={{ padding: "10px" }}>
@@ -69,7 +70,7 @@ function BreweryCard( {brewery} ) {
             size="sm"
             onClick={handleBucketList}
             style={{ marginLeft: 85, padding: "10px" }}
-          >
+          > 
             {" "}
             💛{" "}
           </Button>

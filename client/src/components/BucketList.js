@@ -14,7 +14,7 @@ function BucketList() {
     fetch("/wishlist_breweries")
     .then(r => r.json())
     .then(data => setBreweries(data))
-  })
+  }, [])
 
   // console.log(breweries)
 
