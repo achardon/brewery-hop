@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   resources :reviews
   resources :wishlist_breweries
-  # devise_for :users
-  # resources :reviews
-  # resources :wishlist_breweries
   resources :breweries
   # resources :users
   # devise_for :users, controllers: {
@@ -35,12 +32,6 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 
   get '*path',
       to: 'fallback#index',
