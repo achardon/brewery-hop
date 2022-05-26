@@ -8,8 +8,10 @@ function BreweryCard( {brewery} ) {
 
   const [reviews, setReviews] = useState('')
   const [showReviews, setShowReviews] = useState(false)
-  console.log(reviews)
-  console.log(brewery.name)
+    // console.log(reviews)
+    // console.log(brewery.name)
+  
+  
 
   function address(brewery) {
     return `${brewery.street}, ${brewery.city}, ${brewery.state}`
@@ -32,8 +34,16 @@ function BreweryCard( {brewery} ) {
 
   function handleBucketList() {
     console.log('bucket list!', brewery.name)
+    fetch("/wishlist_breweries", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({name: brewery.name, address: `${brewery.street}, ${brewery.city}, ${brewery.state}`, gps_coords: [brewery.longitude, brewery.latitude], website: brewery.website_url, user_id: 1})
+    })
+    .then(r => r.json())
+    .then(data => console.log(data))
   }
-  
 
   return (
     <Container style={{ padding: "10px" }}>
