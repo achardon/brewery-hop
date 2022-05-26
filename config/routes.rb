@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :reviews
+  resources :wishlist_breweries
   # devise_for :users
   # resources :reviews
   # resources :wishlist_breweries

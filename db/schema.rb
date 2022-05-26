@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_20_021456) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_26_185030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_021456) do
     t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "comment"
+    t.bigint "user_id", null: false
+    t.bigint "brewery_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brewery_id"], name: "index_reviews_on_brewery_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,4 +45,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_021456) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wishlist_breweries", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "brewery_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brewery_id"], name: "index_wishlist_breweries_on_brewery_id"
+    t.index ["user_id"], name: "index_wishlist_breweries_on_user_id"
+  end
+
+  add_foreign_key "reviews", "breweries"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "wishlist_breweries", "breweries"
+  add_foreign_key "wishlist_breweries", "users"
 end

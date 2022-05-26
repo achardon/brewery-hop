@@ -15,7 +15,7 @@ function BreweryCard( {brewery} ) {
     return `${brewery.street}, ${brewery.city}, ${brewery.state}`
   }
 
-  function handleClick() {
+  function handleReviews() {
     setShowReviews(!showReviews)
     fetch(`/breweries`)
     .then(r => r.json())
@@ -29,6 +29,10 @@ function BreweryCard( {brewery} ) {
       }
     })
     }
+
+  function handleBucketList() {
+    console.log('bucket list!', brewery.name)
+  }
   
 
   return (
@@ -43,11 +47,23 @@ function BreweryCard( {brewery} ) {
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </Card.Text> */}
-          <Card.Link href={brewery.website_url}>Visit Website</Card.Link>
+          <Card.Link href={brewery.website_url} style={{ marginTop: 100 }}>
+            Visit Website
+          </Card.Link>
           <br />
-          <Button variant="info" size="sm" onClick={handleClick}>
-            {showReviews? "Hide Reviews" : "Read Reviews"}
+          <Button variant="info" size="sm" onClick={handleReviews}>
+            {showReviews ? "Hide Reviews" : "Read Reviews"}
           </Button>
+          <Button
+            variant="success"
+            size="sm"
+            onClick={handleBucketList}
+            style={{ marginLeft: 85, padding: "10px" }}
+          >
+            {" "}
+            💛{" "}
+          </Button>
+
           {showReviews ? <ReviewsContainer reviews={reviews} /> : null}
         </Card.Body>
       </Card>
@@ -57,3 +73,4 @@ function BreweryCard( {brewery} ) {
 
 export default BreweryCard
 
+//To enter heart emoji: control+command+space

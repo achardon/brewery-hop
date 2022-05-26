@@ -21,7 +21,7 @@ function Navigation() {
     // const user = userArray[0]
   // }, [])
 
-  console.log(user)
+  // console.log(user)
 
   const dispatch = useDispatch()
 
@@ -32,7 +32,7 @@ function Navigation() {
       .then((r) => r.json())
       .then((data) => {
         if (data.data.email) {
-          console.log(data.data.email);
+          // console.log(data.data.email);
           setUser(data.data.email)
         } else {
           console.log("error", data);
