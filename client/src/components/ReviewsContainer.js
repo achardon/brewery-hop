@@ -14,12 +14,13 @@ function ReviewsContainer( {reviews} ) {
 
   return (
     <div>
-      {reviews ? (
+      {reviews.length > 0 ? (
         reviews.map((review) => {
-          return(
-          <Card.Text>
-              <li key={review.id}>{review.comment}</li>
-          </Card.Text>)
+          return (
+            <Card.Text key={review.id}>
+              <li>{review.comment}</li>
+            </Card.Text>
+          );
         })
       ) : (
         <p>No reviews available</p>

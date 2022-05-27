@@ -3,11 +3,12 @@ class BreweriesController < ApplicationController
 
     def index
         # render json: Brewery.all
-        if user_signed_in?
-            render json: current_user
-        else
-            render json: {error: "You must be logged in to view this page."}
-        end
+        # if user_signed_in?
+        #     render json: current_user
+        # else
+        #     render json: {error: "You must be logged in to view this page."}
+        # end
+        render json: Brewery.all
     end
 
 end

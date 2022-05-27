@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  resources :reviews
+  # resources :reviews
   resources :wishlist_breweries
-  resources :breweries
+  resources :breweries do 
+    resources :reviews
+  end
+
   # resources :users
   # devise_for :users, controllers: {
   #       sessions: 'users/sessions'

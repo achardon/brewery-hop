@@ -17,17 +17,19 @@ function BreweryCard( {brewery} ) {
 
   function handleReviews() {
     setShowReviews(!showReviews)
-    fetch(`/breweries`)
-    .then(r => r.json())
-    .then(data => {
-      console.log(data)
-      const selectedBrewery = data.find(b => b.name === brewery.name)
-      console.log(selectedBrewery)
-      // console.log(selectedBrewery.reviews)
-      if (selectedBrewery) {
-        setReviews(selectedBrewery.reviews)
-      }
-    })
+    //need to make brewery id dynamic after figuring out how to get id from database (not from API!)
+    // fetch(`/breweries/7/reviews`)
+    fetch("/breweries")
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+        const selectedBrewery = data.find((b) => b.name === brewery.name);
+        console.log(selectedBrewery);
+        // console.log(selectedBrewery.reviews)
+        if (selectedBrewery) {
+          setReviews(selectedBrewery.reviews);
+        }
+      });
     }
 
   function handleBucketList() {
@@ -76,6 +78,7 @@ function BreweryCard( {brewery} ) {
           </Button>
 
           {showReviews ? <ReviewsContainer reviews={reviews} /> : null}
+          
         </Card.Body>
       </Card>
     </Container>

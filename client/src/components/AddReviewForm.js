@@ -11,6 +11,7 @@ function AddReviewForm() {
     function handleSubmit(e) {
         e.preventDefault()
         console.log(comment)
+        
     }
 
     function handleChange(e) {
