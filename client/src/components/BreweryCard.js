@@ -77,7 +77,7 @@ function BreweryCard( {brewery} ) {
             💛{" "}
           </Button>
 
-          {showReviews ? <ReviewsContainer reviews={reviews} /> : null}
+          {showReviews ? <ReviewsContainer reviews={reviews} brewery={brewery} /> : null}
           
         </Card.Body>
       </Card>

@@ -11,4 +11,10 @@ class BreweriesController < ApplicationController
         render json: Brewery.all
     end
 
+    def create
+        brewery = Brewery.find_or_create_by(name: params[:name], street: params[:street], city: params[:city], state: params[:state], longitude: params[:longitude], latitude: params[:latitude], website_url: params[:website_url])
+        render json: brewery
+    end
+
+
 end

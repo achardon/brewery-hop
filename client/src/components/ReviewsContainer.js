@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 import AddReviewForm from './AddReviewForm';
 
-function ReviewsContainer( {reviews} ) {
+function ReviewsContainer( {reviews, brewery} ) {
 
   const [addReview, setAddReview] = useState(false)
 
@@ -26,7 +26,7 @@ function ReviewsContainer( {reviews} ) {
         <p>No reviews available</p>
       )}
       <Button size="sm" onClick={handleClick}>Add Review</Button>
-      {addReview? <AddReviewForm reviews={reviews} /> : null}
+      {addReview? <AddReviewForm reviews={reviews} brewery={brewery}/> : null}
     </div>
   );
 }
