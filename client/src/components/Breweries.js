@@ -19,7 +19,6 @@ function Breweries() {
   const [lat, setLat] = useState(42.8509);
   const [zoom, setZoom] = useState(9);
   // const coordinatesGeocoder = [-80, 20];
-console.log(breweries)
   // const marker = new mapboxgl.Marker().setLngLat([-72, 42]);
 
   useEffect(() => {

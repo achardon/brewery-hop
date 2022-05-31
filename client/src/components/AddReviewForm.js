@@ -2,28 +2,17 @@ import React, {useEffect, useState} from 'react'
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import {useSelector, useDispatch} from "react-redux";
+import { addReview } from "./reviewsSlice";
 
 
 function AddReviewForm( {brewery} ) {
 
     const [comment, setComment] = useState('')
-    console.log(brewery)
+    const reviews = useSelector(state => state.reviews)
+    console.log(reviews)
 
-    // useEffect(() => {
-    //       fetch("/breweries", {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(brewery)
-    //       })
-    //         .then((r) => r.json())
-    //         .then((data) => {
-    //           console.log(data);
-              
-    //         });
-
-    // }, [])
+    const dispatch = useDispatch()
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -54,6 +43,8 @@ function AddReviewForm( {brewery} ) {
           .then(r => r.json())
           .then(reviewData => {
             console.log(reviewData)
+            //this successfully updates redux state - but it doesn't immediately show up on the page - what am I missing here?
+            dispatch(addReview(reviewData))
           })
     }
 

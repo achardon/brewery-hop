@@ -3,12 +3,19 @@ import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import ReviewsContainer from './ReviewsContainer';
+import { useSelector, useDispatch } from "react-redux";
+import { addReview } from './reviewsSlice';
+
 
 function BreweryCard( {brewery} ) {
 
   const [reviews, setReviews] = useState('')
   const [showReviews, setShowReviews] = useState(false)
   
+  const reviewsInRedux = useSelector((state) => state.reviews);
+  console.log(reviewsInRedux);
+
+  const dispatch = useDispatch()
   
 
   function address(brewery) {
@@ -28,6 +35,9 @@ function BreweryCard( {brewery} ) {
         // console.log(selectedBrewery.reviews)
         if (selectedBrewery) {
           setReviews(selectedBrewery.reviews);
+          selectedBrewery.reviews.map(review => {
+            dispatch(addReview(review))
+          })
         }
       });
     }
@@ -77,7 +87,7 @@ function BreweryCard( {brewery} ) {
             💛{" "}
           </Button>
 
-          {showReviews ? <ReviewsContainer reviews={reviews} brewery={brewery} /> : null}
+          {showReviews ? <ReviewsContainer reviews={reviewsInRedux.filter(review => review.brewery_id === brewery.id)} brewery={brewery} /> : null}
           
         </Card.Body>
       </Card>
