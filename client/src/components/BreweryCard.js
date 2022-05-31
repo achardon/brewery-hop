@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import ReviewsContainer from './ReviewsContainer';
 import { useSelector, useDispatch } from "react-redux";
-import { addReview } from './reviewsSlice';
+import { addReview, removeAllReviews } from './reviewsSlice';
 
 
 function BreweryCard( {brewery} ) {
@@ -13,7 +13,7 @@ function BreweryCard( {brewery} ) {
   const [showReviews, setShowReviews] = useState(false)
   
   const reviewsInRedux = useSelector((state) => state.reviews);
-  console.log(reviewsInRedux);
+  // console.log(reviewsInRedux);
 
   const dispatch = useDispatch()
   
@@ -22,24 +22,44 @@ function BreweryCard( {brewery} ) {
     return `${brewery.street}, ${brewery.city}, ${brewery.state}`
   }
 
+  useEffect(() => {
+    fetch("/breweries")
+      .then((r) => r.json())
+      .then((data) => {
+        // console.log(data);
+        const selectedBrewery = data.find((b) => b.name === brewery.name);
+        // console.log(selectedBrewery);
+        // console.log(selectedBrewery.reviews)
+        if (selectedBrewery) {
+          setReviews(selectedBrewery.reviews);
+          selectedBrewery.reviews.map((review) => {
+            dispatch(addReview(review));
+            //to refresh redux state, use removeAllReviews above
+            // dispatch(removeAllReviews());
+          });
+        }
+      });
+
+  }, [])
+
   function handleReviews() {
     setShowReviews(!showReviews)
     //need to make brewery id dynamic after figuring out how to get id from database (not from API!)
     // fetch(`/breweries/7/reviews`)
-    fetch("/breweries")
-      .then((r) => r.json())
-      .then((data) => {
-        console.log(data);
-        const selectedBrewery = data.find((b) => b.name === brewery.name);
-        console.log(selectedBrewery);
-        // console.log(selectedBrewery.reviews)
-        if (selectedBrewery) {
-          setReviews(selectedBrewery.reviews);
-          selectedBrewery.reviews.map(review => {
-            dispatch(addReview(review))
-          })
-        }
-      });
+    // fetch("/breweries")
+    //   .then((r) => r.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     const selectedBrewery = data.find((b) => b.name === brewery.name);
+    //     console.log(selectedBrewery);
+    //     // console.log(selectedBrewery.reviews)
+    //     if (selectedBrewery) {
+    //       setReviews(selectedBrewery.reviews);
+    //       selectedBrewery.reviews.map(review => {
+    //         dispatch(addReview(review))
+    //       })
+    //     }
+    //   });
     }
 
   function handleBucketList() {
@@ -87,7 +107,11 @@ function BreweryCard( {brewery} ) {
             💛{" "}
           </Button>
 
-          {showReviews ? <ReviewsContainer reviews={reviewsInRedux.filter(review => review.brewery_id === brewery.id)} brewery={brewery} /> : null}
+          {showReviews ? <ReviewsContainer 
+          reviews={reviewsInRedux.filter(review => review.brewery_id === brewery.id)} 
+          // reviews={reviews}
+          brewery={brewery} 
+          /> : null}
           
         </Card.Body>
       </Card>

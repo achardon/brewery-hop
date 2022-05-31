@@ -7,10 +7,11 @@ import BreweryCard from './BreweryCard';
 function BucketList() {
 
   // const breweries = useSelector((state) => state.breweries);
-
+  
   const [breweries, setBreweries] = useState([])
 
   useEffect(() => {
+    //need to only render wishlist breweries of user logged in
     fetch("/wishlist_breweries")
     .then(r => r.json())
     .then(data => setBreweries(data))

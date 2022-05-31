@@ -10,13 +10,13 @@ function AddReviewForm( {brewery} ) {
 
     const [comment, setComment] = useState('')
     const reviews = useSelector(state => state.reviews)
-    console.log(reviews)
+    // console.log(reviews)
 
     const dispatch = useDispatch()
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(comment)
+        // console.log(comment)
         //find brewery if it's in the database
         //if not, create brewery in database
         //add review to brewery
@@ -42,9 +42,10 @@ function AddReviewForm( {brewery} ) {
           })
           .then(r => r.json())
           .then(reviewData => {
-            console.log(reviewData)
+            // console.log(reviewData)
             //this successfully updates redux state - but it doesn't immediately show up on the page - what am I missing here?
-            dispatch(addReview(reviewData))
+            dispatch(addReview({id: reviewData.id, comment: reviewData.comment, brewery_id: reviewData.brewery.id, user_id: reviewData.user.id}))
+            setComment('')
           })
     }
 
