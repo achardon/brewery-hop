@@ -37,26 +37,32 @@ function ReviewsContainer( {reviews, brewery} ) {
   }
 
   return (
-    <div>
-    <div style={{ background: "gray", padding: "10px", borderRadius: "5px" }}>
-      {reviewsInRedux.length > 0 ? (
-        reviewsInRedux.map((review) => {
-          return (
-            <Card.Text key={review.id}>
-              <div style={{padding: "5px"}}>
-                <p>{review.comment}</p>
-              </div>
-            </Card.Text>
-          );
-        })
-      ) : (
-        <p>No reviews available</p>
-      )}
-    </div>
-      <Button size="sm" onClick={handleClick}>
-        Add Review
-      </Button>
-      {addReview ? <AddReviewForm reviews={reviews} brewery={brewery} /> : null}
+    <div style={{ marginTop: "10px" }}>
+      <div
+        style={{ borderStyle: "solid", marginTop: "10px", borderRadius: "5px" }}
+      >
+        {reviewsInRedux.length > 0 ? (
+          reviewsInRedux.map((review) => {
+            return (
+              <Card.Text key={review.id}>
+                <div style={{ marginLeft: "10px" }}>
+                  <p>{review.comment}</p>
+                </div>
+              </Card.Text>
+            );
+          })
+        ) : (
+          <p style={{ marginLeft: "10px" }}>No reviews available</p>
+        )}
+      </div>
+      <div style={{ marginTop: "10px" }}>
+        <Button size="sm" onClick={handleClick}>
+          Add Review
+        </Button>
+        {addReview ? (
+          <AddReviewForm reviews={reviews} brewery={brewery} />
+        ) : null}
+      </div>
     </div>
   );
 }
