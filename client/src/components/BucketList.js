@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { addBrewery } from "./breweriesSlice";
 import Container from 'react-bootstrap/Container';
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import BreweryCard from './BreweryCard';
 
 function BucketList() {
@@ -21,12 +23,18 @@ function BucketList() {
     <Container style={{ padding: "40px" }}>
       <h1>Brewery Bucket List</h1>
       <div>
-        {breweries? breweries.map(brewery => {
-          return <BreweryCard key={brewery.id} brewery={brewery.brewery} />
-        }) : null }
+        <Col>
+          <Row xs={1} md={3} className="g-4">
+            {breweries? breweries.map(brewery => {
+              return <BreweryCard key={brewery.id} brewery={brewery.brewery} />
+            }) : null }
+          </Row>
+        </Col>
+
       </div>
     </Container>
   );
 }
 
 export default BucketList
+

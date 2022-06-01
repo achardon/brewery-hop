@@ -11,7 +11,6 @@ function ReviewsContainer( {reviews, brewery} ) {
 
   //THIS WORKS NOW IN BUCKET LIST BUT NOT IN BREWERY SEARCH TAB because brewery being passed is from API not from database, so the brewery id is wrong
   const [breweryToUse, setBreweryToUse] = useState(brewery)
-  console.log(breweryToUse)
 
   useEffect(() => {
     fetch("/breweries", {
@@ -23,15 +22,12 @@ function ReviewsContainer( {reviews, brewery} ) {
     })
     .then(r => r.json())
     .then(data => {
-      console.log(data)
-
-      setBreweryToUse(data)
-      console.log(breweryToUse)
+      if (data !== brewery) {
+        setBreweryToUse(data)
+      }
     })
-
   }, [])
 
-  console.log(breweryToUse)
   const reviewsInRedux = useSelector((state) => state.reviews.filter(review => review.brewery_id === breweryToUse.id));
 
   const dispatch = useDispatch()
