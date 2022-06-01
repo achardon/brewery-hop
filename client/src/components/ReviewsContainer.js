@@ -38,17 +38,21 @@ function ReviewsContainer( {reviews, brewery} ) {
 
   return (
     <div>
+    <div style={{ background: "gray", padding: "10px", borderRadius: "5px" }}>
       {reviewsInRedux.length > 0 ? (
         reviewsInRedux.map((review) => {
           return (
             <Card.Text key={review.id}>
-              <li>{review.comment}</li>
+              <div style={{padding: "5px"}}>
+                <p>{review.comment}</p>
+              </div>
             </Card.Text>
           );
         })
       ) : (
         <p>No reviews available</p>
       )}
+    </div>
       <Button size="sm" onClick={handleClick}>
         Add Review
       </Button>
