@@ -21,7 +21,7 @@ function BreweryCard( {brewery} ) {
   function address(brewery) {
     return `${brewery.street}, ${brewery.city}, ${brewery.state}`
   }
-
+  // is it smart to do this as a useEffect? this is calling a lot requests before even wanting to look at the reviews...
   useEffect(() => {
     fetch("/breweries")
       .then((r) => r.json())
@@ -35,11 +35,7 @@ function BreweryCard( {brewery} ) {
             // dispatch(removeAllReviews());
             })
           }
-        else {
-
-        }
       });
-
   }, [])
 
   function handleReviews() {
@@ -69,7 +65,8 @@ function BreweryCard( {brewery} ) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({name: brewery.name, street: brewery.street, city: brewery.city, state: brewery.state, longitude: brewery.longitude, latitude: brewery.latitude, website_url: brewery.website_url, user_id: 1})
+      //need to dynamically put in user id of current session
+      body: JSON.stringify({name: brewery.name, street: brewery.street, city: brewery.city, state: brewery.state, longitude: brewery.longitude, latitude: brewery.latitude, website_url: brewery.website_url})
     })
     .then(r => r.json())
     .then(data => console.log(data))

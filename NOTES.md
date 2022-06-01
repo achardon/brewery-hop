@@ -117,11 +117,12 @@ and instead made it:
 # Outstanding questions:
 How to use state to get user in the components I need. Do I need to run a useEffect to get user in every component? Is this more efficient (using redux) than just running the useEffect once and passing the user to each component?
 
+Upon log in, it doesn't immediately update in the navbar... how do I make sure the navbar re-renders? I tried doing a useSelector within the useEffect to access state but that is not allowed.
+
 For adding reviews, should those be in the separate reviewsSlice like I have it now? Or should that be within the breweriesSlice?
 
 Is it possible/okay practice to use multiple style frameworks? For example if I'm using bootstrap already but also want to use another one like tailwinds or Material UI?
 
-Upon log in, it doesn't immediately update in the navbar... how do I make sure the navbar re-renders? I tried doing a useSelector within the useEffect to access state but that is not allowed.
 
 In the Home component, I am getting an error when I console.log(breweries), which is the strangest thing... what is happening?? When I do the same console.log inside a function there is no problem. ('Uncaught TypeError: inputArgs[0].match is not a function')
 
