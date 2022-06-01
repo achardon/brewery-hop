@@ -11,17 +11,27 @@ function BucketList() {
   // const breweries = useSelector((state) => state.breweries);
   
   const [breweries, setBreweries] = useState([])
+  const [error, setError] = useState('')
   console.log(breweries)
+
   useEffect(() => {
     //need to only render wishlist breweries of user logged in
     fetch("/wishlist_breweries")
-    .then(r => r.json())
-    .then(data => setBreweries(data))
+    .then(r => {
+      if (r.ok) {
+        r.json().then(data => setBreweries(data))
+      }
+      else {
+        r.json().then(data => setError('You must be signed in to use this page.'))
+      }
+    })
   }, [])
 
   return (
     <Container style={{ padding: "40px" }}>
       <h1>Brewery Bucket List</h1>
+      <br/>
+      <h3 style={{color: 'red'}}>{error}</h3>
       <div>
         <Col>
           <Row xs={1} md={3} className="g-4">

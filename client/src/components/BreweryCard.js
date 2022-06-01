@@ -68,8 +68,16 @@ function BreweryCard( {brewery} ) {
       //need to dynamically put in user id of current session
       body: JSON.stringify({name: brewery.name, street: brewery.street, city: brewery.city, state: brewery.state, longitude: brewery.longitude, latitude: brewery.latitude, website_url: brewery.website_url})
     })
-    .then(r => r.json())
-    .then(data => console.log(data))
+    .then(r => {
+      if (r.ok) {
+        r.json().then(data => {
+          console.log(data)
+        })
+      }
+      else {
+        r.json().then(alert('Oops! You must be signed in to use this feature.'))
+      }
+    })
     //should this navigate to Bucket List page?
   }
 
