@@ -199,6 +199,8 @@ function Breweries() {
       ))
     : null;
 
+  console.log(breweries)
+
   function handleChange(e) {
     setSearch(e.target.value);
   }

@@ -26,17 +26,17 @@ function BreweryCard( {brewery} ) {
     fetch("/breweries")
       .then((r) => r.json())
       .then((data) => {
-        // console.log(data);
         const selectedBrewery = data.find((b) => b.name === brewery.name);
-        // console.log(selectedBrewery);
-        // console.log(selectedBrewery.reviews)
         if (selectedBrewery) {
           setReviews(selectedBrewery.reviews);
           selectedBrewery.reviews.map((review) => {
             dispatch(addReview(review));
             //to refresh redux state, use removeAllReviews above
             // dispatch(removeAllReviews());
-          });
+            })
+          }
+        else {
+
         }
       });
 
@@ -108,7 +108,7 @@ function BreweryCard( {brewery} ) {
           </Button>
 
           {showReviews ? <ReviewsContainer 
-          reviews={reviewsInRedux.filter(review => review.brewery_id === brewery.id)} 
+          // reviews={reviewsInRedux.filter(review => review.brewery_id === brewery.id)} 
           // reviews={reviews}
           brewery={brewery} 
           /> : null}

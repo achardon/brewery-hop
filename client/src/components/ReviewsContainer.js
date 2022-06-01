@@ -9,18 +9,34 @@ function ReviewsContainer( {reviews, brewery} ) {
   const [addReview, setAddReview] = useState(false);
   // console.log(reviews)
 
-  const reviewsInRedux = useSelector((state) => state.reviews.filter(review => review.brewery_id === brewery.id));
-  // console.log(reviewsInRedux);
+  //THIS WORKS NOW IN BUCKET LIST BUT NOT IN BREWERY SEARCH TAB because brewery being passed is from API not from database, so the brewery id is wrong
+  const [breweryToUse, setBreweryToUse] = useState(brewery)
+  console.log(breweryToUse)
+
+  useEffect(() => {
+    fetch("/breweries", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(brewery),
+    })
+    .then(r => r.json())
+    .then(data => {
+      console.log(data)
+
+      setBreweryToUse(data)
+      console.log(breweryToUse)
+    })
+
+  }, [])
+
+  console.log(breweryToUse)
+  const reviewsInRedux = useSelector((state) => state.reviews.filter(review => review.brewery_id === breweryToUse.id));
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-  }, [])
-  
-
-
   function handleClick() {
-    console.log("add review clicked");
     setAddReview(!addReview);
   }
 

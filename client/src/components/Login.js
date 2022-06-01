@@ -23,20 +23,20 @@ function Login() {
 
   let navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("/login", {
-        method: "POST"
-    })
-    .then(r => r.json())
-    .then(data => {
-        if (data.data.email) {
-            console.log(data.data.email)
-        }
-        else {
-            console.log("error", data)
-        }
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch("/login", {
+  //       method: "POST"
+  //   })
+  //   .then(r => r.json())
+  //   .then(data => {
+  //       if (data.data.email) {
+  //           console.log(data.data.email)
+  //       }
+  //       else {
+  //           console.log("error", data)
+  //       }
+  //   })
+  // }, [])
 
   function handleCreateAccount() {
     navigate(`/sign_up`);
