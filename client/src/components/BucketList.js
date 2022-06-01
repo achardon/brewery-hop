@@ -12,7 +12,7 @@ function BucketList() {
   
   const [breweries, setBreweries] = useState([])
   const [error, setError] = useState('')
-  console.log(breweries)
+  // console.log(breweries)
 
   useEffect(() => {
     //need to only render wishlist breweries of user logged in
