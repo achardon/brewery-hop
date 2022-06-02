@@ -16,25 +16,18 @@ export const removeUser = (user) => {
 }
 
 //Reducer
-const initialState = [];
+const initialState = {};
 
 export default function usersReducer(state = initialState, action) {
   switch (action.type) {
     case "users/add":
-      return [
-        {
+      return {
           id: action.payload.id,
           email: action.payload.email,
-        },
-      ];
-
+        }
+      
     case "users/remove":
-      return [
-        // {
-        //   id: action.payload.id,
-        //   email: action.payload.email,
-        // },
-      ];
+      return {}
 
     default:
       return state;

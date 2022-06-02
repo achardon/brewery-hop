@@ -17,10 +17,9 @@ function Navigation() {
   const [user, setUser] = useState('')
   //can't use useSelector within useEffect??
   // useEffect(() => {
-    const userArray = useSelector((state) => state.users);
-    const userInRedux = userArray[0]
-    console.log(userInRedux)
-    console.log(userArray)
+    // const userArray = useSelector((state) => state.users);
+    const userInRedux = useSelector((state) => state.users)
+    // console.log(userInRedux)
   // }, [])
 
 
@@ -75,13 +74,13 @@ function Navigation() {
           </Nav>
 
           <Navbar.Collapse className="justify-content-end">
-            {userInRedux ? (
+            {userInRedux.email ? (
               <Navbar.Text>
                 Signed in as: <a href="#login">{userInRedux.email}</a>
               </Navbar.Text>
             ) : null}
             <div style={{ padding: "10px" }}>
-              {userInRedux ? (
+              {userInRedux.email ? (
                 <Button variant="success" onClick={handleLogOut}>
                   Log Out
                 </Button>
