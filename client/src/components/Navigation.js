@@ -11,20 +11,10 @@ import { removeUser } from "./usersSlice";
 
 function Navigation() {
 
-  //problem: upon log in, it doesn't immediately update in the navbar... how do I make sure the navbar re-renders? I tried doing a useSelector within the useEffect to access state but that is not allowed.
   let navigate = useNavigate()
 
   const [user, setUser] = useState('')
-  //can't use useSelector within useEffect??
-  // useEffect(() => {
-    // const userArray = useSelector((state) => state.users);
-    const userInRedux = useSelector((state) => state.users)
-    // console.log(userInRedux)
-  // }, [])
-
-
-
-  // console.log(user)
+  const userInRedux = useSelector((state) => state.users)
 
   const dispatch = useDispatch()
 
@@ -35,7 +25,7 @@ function Navigation() {
       .then((r) => r.json())
       .then((data) => {
         if (data.data.email) {
-          // console.log(data.data.email);
+          console.log(data.data.email);
           setUser(data.data.email)
         } else {
           console.log("error", data);
@@ -58,8 +48,10 @@ function Navigation() {
     })
     .then((data) => console.log(data))
     .then(console.log('test'))
-    // how to logout with devise?
   }
+
+  console.log(user)
+  console.log(userInRedux)
 
   return (
     <>
@@ -74,13 +66,13 @@ function Navigation() {
           </Nav>
 
           <Navbar.Collapse className="justify-content-end">
-            {userInRedux.email ? (
+            {userInRedux.email || user ? (
               <Navbar.Text>
-                Signed in as: <a href="#login">{userInRedux.email}</a>
+                Signed in as: <a href="#login">{userInRedux.email? userInRedux.email : user}</a>
               </Navbar.Text>
             ) : null}
             <div style={{ padding: "10px" }}>
-              {userInRedux.email ? (
+              {userInRedux.email || user ? (
                 <Button variant="success" onClick={handleLogOut}>
                   Log Out
                 </Button>

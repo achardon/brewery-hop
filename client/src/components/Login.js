@@ -55,12 +55,11 @@ function Login() {
       },
       body: JSON.stringify({user: form}),
     }).then((r) => {
-        console.log('.then')
       if (r.ok) {
         r.json()
         .then((data) => {
-          console.log(data)
-          console.log("Welcome", data.data.email, "!!")
+          // console.log(data)
+          // console.log("Welcome", data.data.email, "!!")
           dispatch(addUser(data.data))
           setForm({
             email: "",
