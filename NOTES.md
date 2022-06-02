@@ -8,22 +8,22 @@ As a user (not signed in) I can:
 -search a city - DONE
 -see results of all breweries in that city as a list - DONE
 -AND as a map - DONE
-    -need to use geocoding to get coordinates of the search city
-    -need to also get coords of each brewery that gets returned
-    -add pin of each brewery to map after search
--upon clicking on brewery:
-    -see name, address, and website of brewery
-    -read reviews about that brewery
+    -need to use geocoding to get coordinates of the search city - DONE
+    -need to also get coords of each brewery that gets returned - DONE
+    -add pin of each brewery to map after search - DONE
+-For each brewery:
+    -see name, address, and website of brewery - DONE
+    -read reviews about that brewery - DONE
 
 As a user (signed in) I can:
--"check in" to a brewery that I have visited
--add review to a brewery
+-add a brewery to my bucket list - done
+-add review to a brewery - done
 -rate brewery
--see my Brewery Bucket List/Wishlist of breweries I want to visit
--see my Already Been There List of breweries
+-see my Brewery Bucket List/Wishlist of breweries I want to visit - done
 
 # Stretch Goals
-
+-user can "check in" to brewery
+-user can see Already Been There List of breweries
 -user can add certain mile radius of city to search for
 -additional model: Beer, where users can rate specific beers from each brewery as well as the brewery itself
 
@@ -193,3 +193,4 @@ Users
 achardon@ucla.edu, yesplease
 hagartypatrick@gmail.com, beeroclock
 example@ucla.edu, example
+enzo@example.com, enzoenzo

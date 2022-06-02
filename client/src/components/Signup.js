@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function Signup({ setUser }) {
   const [form, setForm] = useState({
-    username: "",
+    email: "",
     password: "",
     password_confirmation: "",
   });
@@ -27,12 +27,12 @@ function Signup({ setUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/users", {
+    fetch("/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify( {user: form} ),
     }).then((r) => {
       if (r.ok) {
         r.json().then((data) => setUser(data));
@@ -49,14 +49,14 @@ function Signup({ setUser }) {
       <h1>Create Account</h1>
 
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Username</Form.Label>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
           <Form.Control
             type="text"
-            name="username"
-            placeholder="Enter Username"
+            name="email"
+            placeholder="Enter Email"
             onChange={handleChange}
-            value={form.username}
+            value={form.email}
           />
         </Form.Group>
 

@@ -9,9 +9,8 @@ import { addReview } from "./reviewsSlice";
 function AddReviewForm( {brewery} ) {
 
     const [comment, setComment] = useState('')
+    const [errors, setErrors] = useState('')
     const reviews = useSelector(state => state.reviews)
-    // console.log(reviews)
-
     const dispatch = useDispatch()
 
     function handleSubmit(e) {
@@ -26,24 +25,61 @@ function AddReviewForm( {brewery} ) {
           },
           body: JSON.stringify(brewery),
         })
-          .then((r) => r.json())
+          // .then((r) => {
+          //   if (r.ok) {
+          //     r.json().then((data) => {
+          //     const brewery = data
+          //     console.log(data)
+          //     return fetch(`/breweries/${brewery.id}/reviews`, {
+          //       method: "POST",
+          //       headers: {
+          //         "Content-Type": "application/json",
+          //       },
+          //       body: JSON.stringify({comment: comment, brewery_id: brewery.id}),
+          //     })
+          //     .then(r => r.json())
+          //     .then(reviewData => {
+          //       console.log(reviewData)
+          //       dispatch(addReview({id: reviewData.id, comment: reviewData.comment, brewery_id: reviewData.brewery.id, user_id: reviewData.user.id}))
+          //       setComment('')
+          //     })
+
+          //   })
+          //   }
+          //   else {
+          //     alert('need to be signed in!')
+          //     setErrors('You need to sign in to leave a review!')
+          //   }
+          // }
+          // )}
+
+          .then(r => r.json())
           .then((data) => {
             const brewery = data
+            console.log(data)
             return fetch(`/breweries/${brewery.id}/reviews`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              //need to find best way to dynamically get user_id
-              body: JSON.stringify({comment: comment, brewery_id: brewery.id, user_id: 1}),
+              body: JSON.stringify({comment: comment, brewery_id: brewery.id}),
             });
           })
-          .then(r => r.json())
-          .then(reviewData => {
-            dispatch(addReview({id: reviewData.id, comment: reviewData.comment, brewery_id: reviewData.brewery.id, user_id: reviewData.user.id}))
-            setComment('')
+          .then(r => {
+            if (r.ok) {
+                  r.json().then(reviewData => {
+                  console.log(reviewData)
+                  dispatch(addReview({id: reviewData.id, comment: reviewData.comment, brewery_id: reviewData.brewery.id, user_id: reviewData.user.id}))
+                  setComment('')
+                })
+            }
+            else {
+              // alert('need to be signed in!')
+              setErrors('You need to sign in to leave a review!')
+            }
           })
-    }
+        }
+    
 
     function handleChange(e) {
         setComment(e.target.value)
@@ -66,6 +102,8 @@ function AddReviewForm( {brewery} ) {
         <Button variant="success" type="submit">
           Submit
         </Button>
+
+        <h6 style={{color: "blue"}}>{errors? errors : null}</h6>
       </Form>
     </div>
   );

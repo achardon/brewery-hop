@@ -146,7 +146,7 @@ function Breweries() {
           .setPopup(
             new mapboxgl.Popup({ offset: 25 }) // add popups
               .setHTML(
-                `<h3>${brewery.name}</h3><button>More Info</button>`
+                `<h3>${brewery.name}</h3>`
               )
           )
           .addTo(map.current);

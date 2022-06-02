@@ -1,5 +1,5 @@
 class WishlistBreweriesController < ApplicationController
-    #need to add before_action for authorizing - only works if logged in!
+before_action :authenticate_user!
 
     def index
         user = current_user

@@ -14,6 +14,8 @@ class BreweriesController < ApplicationController
     def create
         brewery = Brewery.find_or_create_by(name: params[:name], street: params[:street], city: params[:city], state: params[:state], longitude: params[:longitude], latitude: params[:latitude], website_url: params[:website_url])
         render json: brewery
+
+        # if params for review exist, then you can add a review here; if not, it can just create the brewery.
     end
 
 

@@ -45,9 +45,9 @@ function ReviewsContainer( {reviews, brewery} ) {
           reviewsInRedux.map((review) => {
             return (
               <Card.Text key={review.id}>
-                <div style={{ marginLeft: "10px" }}>
-                  <p>{review.comment}</p>
-                </div>
+                {/* <div style={{ marginLeft: "10px" }}> */}
+                  <li style={{ marginLeft: "10px" }}>{review.comment}</li>
+                {/* </div> */}
               </Card.Text>
             );
           })

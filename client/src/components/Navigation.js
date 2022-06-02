@@ -17,9 +17,13 @@ function Navigation() {
   const [user, setUser] = useState('')
   //can't use useSelector within useEffect??
   // useEffect(() => {
-    // const userArray = useSelector((state) => state.users);
-    // const user = userArray[0]
+    const userArray = useSelector((state) => state.users);
+    const userInRedux = userArray[0]
+    console.log(userInRedux)
+    console.log(userArray)
   // }, [])
+
+
 
   // console.log(user)
 
@@ -39,23 +43,6 @@ function Navigation() {
         }
       });
     }, []);
-
-
-
-  // useEffect(() => {
-  //   fetch("/login", {
-  //     method: "POST",
-  //   })
-  //     .then((r) => r.json())
-  //     .then((data) => {
-  //       if (data.data.email) {
-  //         setUser(data.data.email);
-  //       } else {
-  //         console.log("error", data);
-  //       }
-  //     });
-  //   }, []);
-
 
   function handleLogIn() {
     navigate(`/log_in`)
@@ -88,13 +75,13 @@ function Navigation() {
           </Nav>
 
           <Navbar.Collapse className="justify-content-end">
-            {user ? (
+            {userInRedux ? (
               <Navbar.Text>
-                Signed in as: <a href="#login">{user}</a>
+                Signed in as: <a href="#login">{userInRedux.email}</a>
               </Navbar.Text>
             ) : null}
             <div style={{ padding: "10px" }}>
-              {user ? (
+              {userInRedux ? (
                 <Button variant="success" onClick={handleLogOut}>
                   Log Out
                 </Button>

@@ -9,10 +9,11 @@ import BreweryCard from './BreweryCard';
 function BucketList() {
 
   // const breweries = useSelector((state) => state.breweries);
-  
+  // text about having to be signed in
+
   const [breweries, setBreweries] = useState([])
   const [error, setError] = useState('')
-  // console.log(breweries)
+  console.log(breweries)
 
   useEffect(() => {
     //need to only render wishlist breweries of user logged in
@@ -30,17 +31,22 @@ function BucketList() {
   return (
     <Container style={{ padding: "40px" }}>
       <h1>Brewery Bucket List</h1>
-      <br/>
-      <h3 style={{color: 'red'}}>{error}</h3>
+      <br />
+      <h3 style={{ color: "red" }}>{error}</h3>
       <div>
         <Col>
           <Row xs={1} md={3} className="g-4">
-            {breweries? breweries.map(brewery => {
-              return <BreweryCard key={brewery.id} brewery={brewery.brewery} />
-            }) : null }
+            {breweries.length > 0 ? (
+              breweries.map((brewery) => {
+                return (
+                  <BreweryCard key={brewery.id} brewery={brewery.brewery} />
+                );
+              })
+            ) : (
+              <p>You have no breweries on your bucket list!</p>
+            )}
           </Row>
         </Col>
-
       </div>
     </Container>
   );

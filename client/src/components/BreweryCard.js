@@ -11,6 +11,7 @@ function BreweryCard( {brewery} ) {
 
   const [reviews, setReviews] = useState('')
   const [showReviews, setShowReviews] = useState(false)
+  const [errors, setErrors] = useState('')
   
   const reviewsInRedux = useSelector((state) => state.reviews);
   // console.log(reviewsInRedux);
@@ -40,6 +41,7 @@ function BreweryCard( {brewery} ) {
 
   function handleReviews() {
     setShowReviews(!showReviews)
+    setErrors('')
     //need to make brewery id dynamic after figuring out how to get id from database (not from API!)
     // fetch(`/breweries/7/reviews`)
     // fetch("/breweries")
@@ -75,7 +77,7 @@ function BreweryCard( {brewery} ) {
         })
       }
       else {
-        r.json().then(alert('Oops! You must be signed in to use this feature.'))
+        r.json().then(setErrors('Oops! You must be signed in to use this feature.'))
       }
     })
     //should this navigate to Bucket List page?
@@ -107,17 +109,18 @@ function BreweryCard( {brewery} ) {
             size="sm"
             onClick={handleBucketList}
             style={{ marginLeft: 85, padding: "10px" }}
-          > 
+          >
             {" "}
             💛{" "}
           </Button>
-
-          {showReviews ? <ReviewsContainer 
-          // reviews={reviewsInRedux.filter(review => review.brewery_id === brewery.id)} 
-          // reviews={reviews}
-          brewery={brewery} 
-          /> : null}
-          
+          <h6 style={{ color: "blue" }}>{errors ? errors : null}</h6>
+          {showReviews ? (
+            <ReviewsContainer
+              // reviews={reviewsInRedux.filter(review => review.brewery_id === brewery.id)}
+              // reviews={reviews}
+              brewery={brewery}
+            />
+          ) : null}
         </Card.Body>
       </Card>
     </Container>
