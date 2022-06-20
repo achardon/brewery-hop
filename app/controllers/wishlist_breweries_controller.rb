@@ -6,7 +6,7 @@ before_action :authenticate_user!
         userWishlist = WishlistBrewery.where(user_id: current_user.id)
         render json: userWishlist
     end
-
+z
     # def show
     #     user = current_user
     #     userWishlist = WishlistBrewery.where(user_id: current_user.id)

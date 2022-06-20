@@ -1,6 +1,11 @@
 # TO DO
 -update About page with more info
--upon log out if on brewery bucket list page, redirect to home page
+-upon log out if on brewery bucket list page, redirect to home page DONE
+-there is a lot rendering happening with breweries because all reviews are being fetched before needing them. Need to change to only fetch when user wants to see them!
+-bucket list: heart should change color if it is in bucket list
+  - should be able to remove brewery from bucket list
+-write readme
+-styling changes to brewery card?
 
 
 # Description
@@ -23,11 +28,11 @@ As a user (not signed in) I can:
 As a user (signed in) I can:
 -add a brewery to my bucket list - done
 -add review to a brewery - done
--rate brewery
 -see my Brewery Bucket List/Wishlist of breweries I want to visit - done
 
 # Stretch Goals
 -user can "check in" to brewery
+-user can rate brewery
 -user can see Already Been There List of breweries
 -user can add certain mile radius of city to search for
 -additional model: Beer, where users can rate specific beers from each brewery as well as the brewery itself
@@ -120,7 +125,6 @@ and instead made it:
     ],
 
 # Outstanding questions:
-TO DO: there is a lot rendering happening with breweries because all reviews are being fetched before needing them. Need to change to only fetch when user wants to see them!
 
 How to use state to get user in the components I need. Do I need to run a useEffect to get user in every component? Is this more efficient (using redux) than just running the useEffect once and passing the user to each component?
 
@@ -129,7 +133,6 @@ Upon log in, it doesn't immediately update in the navbar... how do I make sure t
 For adding reviews, should those be in the separate reviewsSlice like I have it now? Or should that be within the breweriesSlice?
 
 Is it possible/okay practice to use multiple style frameworks? For example if I'm using bootstrap already but also want to use another one like tailwinds or Material UI?
-
 
 In the Home component, I am getting an error when I console.log(breweries), which is the strangest thing... what is happening?? When I do the same console.log inside a function there is no problem. ('Uncaught TypeError: inputArgs[0].match is not a function')
 

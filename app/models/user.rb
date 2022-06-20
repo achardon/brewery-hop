@@ -6,5 +6,6 @@ class User < ApplicationRecord
 
   has_many :reviews
   has_many :wishlist_breweries
+  has_many :breweries, through: :wishlist_breweries
   
 end

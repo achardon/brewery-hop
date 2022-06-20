@@ -108,10 +108,11 @@ function BreweryCard( {brewery} ) {
             variant="success"
             size="sm"
             onClick={handleBucketList}
-            style={{ marginLeft: 85, padding: "10px" }}
+            style={{ marginLeft: 85, padding: "10px", backgroundColor: "white" }}
           >
             {" "}
             💛{" "}
+            {/* 🤍 💜 */}
           </Button>
           <h6 style={{ color: "blue" }}>{errors ? errors : null}</h6>
           {showReviews ? (
