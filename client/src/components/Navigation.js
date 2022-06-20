@@ -48,6 +48,7 @@ function Navigation() {
     })
     .then((data) => console.log(data))
     .then(console.log('test'))
+    navigate(`/`)
   }
 
   console.log(user)
