@@ -12,6 +12,7 @@ function BreweryCard( {brewery} ) {
   const [reviews, setReviews] = useState('')
   const [showReviews, setShowReviews] = useState(false)
   const [errors, setErrors] = useState('')
+  const [isBucketItem, setIsBucketItem] = useState(false)
   
   const reviewsInRedux = useSelector((state) => state.reviews);
   // console.log(reviewsInRedux);
@@ -67,7 +68,6 @@ function BreweryCard( {brewery} ) {
       headers: {
         "Content-Type": "application/json"
       },
-      //need to dynamically put in user id of current session
       body: JSON.stringify({name: brewery.name, street: brewery.street, city: brewery.city, state: brewery.state, longitude: brewery.longitude, latitude: brewery.latitude, website_url: brewery.website_url})
     })
     .then(r => {
