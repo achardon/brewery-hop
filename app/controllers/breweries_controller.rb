@@ -11,9 +11,9 @@ class BreweriesController < ApplicationController
         render json: Brewery.all
     end
 
-    def show
-        brewery = Brewery.find(params[:id])
-        render json: brewery
+    def show_by_user
+        breweries = Brewery.includes(users).where(users: {user: current_user})
+        render json: breweries
     end
 
     def create

@@ -18,13 +18,30 @@ function BreweryCard( {brewery} ) {
   // console.log(reviewsInRedux);
 
   const dispatch = useDispatch()
-  
 
   function address(brewery) {
     return `${brewery.street}, ${brewery.city}, ${brewery.state}`
   }
   // is it smart to do this as a useEffect? this is calling a lot requests before even wanting to look at the reviews...
-  useEffect(() => {
+  // useEffect(() => {
+  //   fetch("/breweries")
+  //     .then((r) => r.json())
+  //     .then((data) => {
+  //       const selectedBrewery = data.find((b) => b.name === brewery.name);
+  //       if (selectedBrewery) {
+  //         setReviews(selectedBrewery.reviews);
+  //         selectedBrewery.reviews.map((review) => {
+  //           dispatch(addReview(review));
+  //           //to refresh redux state, use removeAllReviews above
+  //           // dispatch(removeAllReviews());
+  //           })
+  //         }
+  //     });
+  // }, [])
+
+  function handleReviews() {
+    setShowReviews(!showReviews)
+    setErrors('')
     fetch("/breweries")
       .then((r) => r.json())
       .then((data) => {
@@ -35,14 +52,12 @@ function BreweryCard( {brewery} ) {
             dispatch(addReview(review));
             //to refresh redux state, use removeAllReviews above
             // dispatch(removeAllReviews());
-            })
-          }
+          });
+        }
       });
-  }, [])
 
-  function handleReviews() {
-    setShowReviews(!showReviews)
-    setErrors('')
+
+
     //need to make brewery id dynamic after figuring out how to get id from database (not from API!)
     // fetch(`/breweries/7/reviews`)
     // fetch("/breweries")

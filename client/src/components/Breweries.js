@@ -12,6 +12,7 @@ function Breweries() {
   const [search, setSearch] = useState("");
   const [breweries, setBreweries] = useState("");
   const [newSearch, setNewSearch] = useState(false);
+  const [userBreweries, setUserBreweries] = useState([]);
 
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -159,8 +160,13 @@ function Breweries() {
     .then((data) => {
       setCoordinates(city, data);
       setBreweries(data);
-      //change newSearch variable to trigger re-loading of new map with new coordinates
     });
+    // is there a way to fetch breweries shown that are also in the database so that we can display a red heart for the breweries that are already in the bucket list??
+    // Maybe it can be a return fetch from the previous fetch that gives the breweries returned from search as a parameter and then searches the database for those that exist for that user??
+    // maybe you need two different brewery cards - one to render after the search and the other to render in the bucket list?
+    // fetch('/breweries_by_user')
+    // .then(r => r.json())
+    // .then(data => console.log(data))
   }
 
   return (

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  get '/breweries_by_user', to: 'breweries#show_by_user'
+
   # resources :users
   # devise_for :users, controllers: {
   #       sessions: 'users/sessions'

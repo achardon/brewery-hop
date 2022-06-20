@@ -1,7 +1,8 @@
 # TO DO
+CURRENTLY WORKING ON: breweries component line 164
 -update About page with more info
 -upon log out if on brewery bucket list page, redirect to home page DONE
--there is a lot rendering happening with breweries because all reviews are being fetched before needing them. Need to change to only fetch when user wants to see them!
+-there is a lot rendering happening with breweries because all reviews are being fetched before needing them. Need to change to only fetch when user wants to see them! DONE (now fetching just when showReviews variable changes)
 -bucket list: heart should change color if it is in bucket list
   - should be able to remove brewery from bucket list
 -write readme
