@@ -11,9 +11,14 @@ class BreweriesController < ApplicationController
         render json: Brewery.all
     end
 
-    def show_by_user
-        breweries = Brewery.includes(users).where(users: {user: current_user})
-        render json: breweries
+    def brewery_exists
+        brewery = Brewery.find_by(name: params[:name])
+        users = brewery.users
+        if users.include?(current_user)
+            render json: brewery
+        else
+            render json: {error: "No brewery found"}
+        end
     end
 
     def create

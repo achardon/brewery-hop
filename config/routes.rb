@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  get '/breweries_by_user', to: 'breweries#show_by_user'
+  get '/brewery_exists', to: 'breweries#brewery_exists'
 
   # resources :users
   # devise_for :users, controllers: {

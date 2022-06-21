@@ -13,6 +13,7 @@ function BreweryCard( {brewery} ) {
   const [showReviews, setShowReviews] = useState(false)
   const [errors, setErrors] = useState('')
   const [isBucketItem, setIsBucketItem] = useState(false)
+  const [currentBrewery, setCurrentBrewery] = useState(null)
   
   const reviewsInRedux = useSelector((state) => state.reviews);
   // console.log(reviewsInRedux);
@@ -22,6 +23,12 @@ function BreweryCard( {brewery} ) {
   function address(brewery) {
     return `${brewery.street}, ${brewery.city}, ${brewery.state}`
   }
+
+  useEffect(() => {
+    fetch(`/brewery_exists?name=${brewery.name}`)
+    .then(r => r.json())
+    .then(data => setCurrentBrewery(data))
+  }, [])
   // is it smart to do this as a useEffect? this is calling a lot requests before even wanting to look at the reviews...
   // useEffect(() => {
   //   fetch("/breweries")
@@ -38,6 +45,9 @@ function BreweryCard( {brewery} ) {
   //         }
   //     });
   // }, [])
+
+  console.log(currentBrewery)
+  // console.log(currentBrewery.name);
 
   function handleReviews() {
     setShowReviews(!showReviews)
@@ -97,7 +107,7 @@ function BreweryCard( {brewery} ) {
     })
     //should this navigate to Bucket List page?
   }
-
+  
   //Need to change brewery card so that if it is a wishlist item it doesn't show the heart, or maybe it has the option of removing it? Also if a brewery is already on the wishlist it should not be added again.
 
   return (
@@ -123,11 +133,15 @@ function BreweryCard( {brewery} ) {
             variant="success"
             size="sm"
             onClick={handleBucketList}
-            style={{ marginLeft: 85, padding: "10px", backgroundColor: "white" }}
+            style={{
+              marginLeft: 85,
+              padding: "10px",
+              backgroundColor: "white",
+            }}
           >
-            {" "}
-            💛{" "}
-            {/* 🤍 💜 */}
+            💛
+            {/* {'name' in currentBrewery? "💜" : "🤍"} */}
+            {/* 💛 🤍 💜 */}
           </Button>
           <h6 style={{ color: "blue" }}>{errors ? errors : null}</h6>
           {showReviews ? (
