@@ -13,7 +13,7 @@ function BreweryCard( {brewery} ) {
   const [showReviews, setShowReviews] = useState(false)
   const [errors, setErrors] = useState('')
   const [isBucketItem, setIsBucketItem] = useState(false)
-  const [currentBrewery, setCurrentBrewery] = useState(null)
+  // const [currentBrewery, setCurrentBrewery] = useState(null)
   
   const reviewsInRedux = useSelector((state) => state.reviews);
 
@@ -23,11 +23,11 @@ function BreweryCard( {brewery} ) {
     return `${brewery.street}, ${brewery.city}, ${brewery.state}`
   }
 
-  useEffect(() => {
-    fetch(`/brewery_exists?name=${brewery.name}`)
-    .then(r => r.json())
-    .then(data => setCurrentBrewery(data))
-  }, [])
+  // useEffect(() => {
+  //   fetch(`/brewery_exists?name=${brewery.name}`)
+  //   .then(r => r.json())
+  //   .then(data => setCurrentBrewery(data))
+  // }, [])
   // is it smart to do this as a useEffect? this is calling a lot requests before even wanting to look at the reviews...
   // useEffect(() => {
   //   fetch("/breweries")
@@ -44,8 +44,6 @@ function BreweryCard( {brewery} ) {
   //         }
   //     });
   // }, [])
-
-  console.log(brewery)
 
   function handleReviews() {
     setShowReviews(!showReviews)
@@ -83,7 +81,6 @@ function BreweryCard( {brewery} ) {
     }
 
   function handleBucketList() {
-    console.log('bucket list!', brewery.name)
     fetch("/wishlist_breweries", {
       method: "POST",
       headers: {
@@ -94,7 +91,6 @@ function BreweryCard( {brewery} ) {
     .then(r => {
       if (r.ok) {
         r.json().then(data => {
-          console.log(data)
         })
       }
       else {
@@ -132,8 +128,6 @@ function BreweryCard( {brewery} ) {
             }}
           >
             💛
-            {/* {'name' in currentBrewery? "💜" : "🤍"} */}
-            {/* 💛 🤍 💜 */}
           </Button>
           <h6 style={{ color: "blue" }}>{errors ? errors : null}</h6>
           {showReviews ? (

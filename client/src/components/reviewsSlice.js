@@ -20,7 +20,6 @@ export const removeAllReviews = (review) => {
   };
 };
 
-
 //Reducer
 const initialState = [];
 

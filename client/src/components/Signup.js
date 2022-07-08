@@ -4,8 +4,11 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addUser } from "./usersSlice";
 
-function Signup({ setUser }) {
+
+function Signup() {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -14,6 +17,9 @@ function Signup({ setUser }) {
 
   const [errors, setErrors] = useState('');
   const [showErrors, setShowErrors] = useState(true);
+
+  const user = useSelector((state) => state.users);
+  const dispatch = useDispatch();
 
   let navigate = useNavigate();
 
@@ -35,7 +41,7 @@ function Signup({ setUser }) {
       body: JSON.stringify( {user: form} ),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => setUser(data));
+        r.json().then((data) => dispatch(addUser(data.data)));
         navigate(`/`);
       } else {
         r.json().then((error) => {

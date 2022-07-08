@@ -25,7 +25,6 @@ function Breweries() {
 
   useEffect(() => {
     if (map.current) return; // initialize map only once 
-    console.log('useEffect running again')
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -80,14 +79,6 @@ function Breweries() {
     //there is some CSS for markers in index.css
     data.map(brewery => {
       if (brewery.longitude && brewery.latitude) {
-          // console.log(typeof(brewery.longitude))
-          // console.log(typeof(parseFloat(brewery.longitude)))
-          // console.log(
-          //   [parseFloat(brewery.longitude),
-          //   parseFloat(brewery.latitude)]
-          // );
-          // console.log(brewery.name, 'long, lat')
-          // console.log(brewery);
         const marker = new mapboxgl.Marker()
           .setLngLat([
             parseFloat(brewery.longitude),

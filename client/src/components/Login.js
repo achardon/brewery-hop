@@ -19,24 +19,7 @@ function Login() {
   const user = useSelector(state => state.users)
   const dispatch = useDispatch()
 
-//   console.log(user)
-
   let navigate = useNavigate();
-
-  // useEffect(() => {
-  //   fetch("/login", {
-  //       method: "POST"
-  //   })
-  //   .then(r => r.json())
-  //   .then(data => {
-  //       if (data.data.email) {
-  //           console.log(data.data.email)
-  //       }
-  //       else {
-  //           console.log("error", data)
-  //       }
-  //   })
-  // }, [])
 
   function handleCreateAccount() {
     navigate(`/sign_up`);
@@ -58,8 +41,6 @@ function Login() {
       if (r.ok) {
         r.json()
         .then((data) => {
-          // console.log(data)
-          // console.log("Welcome", data.data.email, "!!")
           dispatch(addUser(data.data))
           setForm({
             email: "",
@@ -69,11 +50,15 @@ function Login() {
         navigate(`/`);
       } else {
         r.json().then((error) => {
+          console.log('no!')
           setErrors("Incorrect username or password.");
           setShowErrors(true);
         });
       }
     });
+      // fetch does not complete if login info is incorrect so we can set the error below
+      // setErrors("Incorrect username or password.");
+      // setShowErrors(true);
   }
 
   return (

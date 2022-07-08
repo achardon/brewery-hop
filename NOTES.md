@@ -1,18 +1,3 @@
-# TO DO
-CURRENTLY WORKING ON: breweries component line 164
--update About page with more info
--upon log out if on brewery bucket list page, redirect to home page DONE
--there is a lot rendering happening with breweries because all reviews are being fetched before needing them. Need to change to only fetch when user wants to see them! DONE (now fetching just when showReviews variable changes)
--bucket list: heart should change color if it is in bucket list
-  - should be able to remove brewery from bucket list
--write readme
--styling changes to brewery card?
-
-
-# Description
-
-This app is designed for brewery enthusiasts who want to easily figure out which breweries are in a town they are visiting. The user will be able to search for breweries in a given town and see a list of breweries as well as a map that shows pins for different breweries. Users will be able to easily read reviews about each brewery and visit the brewery website. When logged in, users can also add reviews to breweries they have been to, as well as create a brewery bucket list.
-
 # MVP
 
 As a user (not signed in) I can:
@@ -32,7 +17,7 @@ As a user (signed in) I can:
 -see my Brewery Bucket List/Wishlist of breweries I want to visit - done
 
 # Stretch Goals
--user can "check in" to brewery
+-user can delete brewery from bucketlist - done
 -user can rate brewery
 -user can see Already Been There List of breweries
 -user can add certain mile radius of city to search for
@@ -205,4 +190,4 @@ achardon@ucla.edu, yesplease
 hagartypatrick@gmail.com, beeroclock
 example@ucla.edu, example
 enzo@example.com, enzoenzo
-ale@example.com, ale (don't think I created this one yet?)
+ale@example.com, imperial

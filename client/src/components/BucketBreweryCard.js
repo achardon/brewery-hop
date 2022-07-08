@@ -20,9 +20,6 @@ function BucketBreweryCard({ brewery, wishlistBrewery, removeFromBucketlist }) {
 
   const dispatch = useDispatch();
 
-  console.log(wishlistBrewery.id)
-  console.log(wishlistBrewery)
-
   function address(brewery) {
     return `${brewery.street}, ${brewery.city}, ${brewery.state}`;
   }
@@ -32,24 +29,6 @@ function BucketBreweryCard({ brewery, wishlistBrewery, removeFromBucketlist }) {
       .then((r) => r.json())
       .then((data) => setCurrentBrewery(data));
   }, []);
-  // is it smart to do this as a useEffect? this is calling a lot requests before even wanting to look at the reviews...
-  // useEffect(() => {
-  //   fetch("/breweries")
-  //     .then((r) => r.json())
-  //     .then((data) => {
-  //       const selectedBrewery = data.find((b) => b.name === brewery.name);
-  //       if (selectedBrewery) {
-  //         setReviews(selectedBrewery.reviews);
-  //         selectedBrewery.reviews.map((review) => {
-  //           dispatch(addReview(review));
-  //           //to refresh redux state, use removeAllReviews above
-  //           // dispatch(removeAllReviews());
-  //           })
-  //         }
-  //     });
-  // }, [])
-
-//   console.log(currentBrewery);
 
   function handleReviews() {
     setShowReviews(!showReviews);
@@ -67,31 +46,12 @@ function BucketBreweryCard({ brewery, wishlistBrewery, removeFromBucketlist }) {
           });
         }
       });
-
-    //need to make brewery id dynamic after figuring out how to get id from database (not from API!)
-    // fetch(`/breweries/7/reviews`)
-    // fetch("/breweries")
-    //   .then((r) => r.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     const selectedBrewery = data.find((b) => b.name === brewery.name);
-    //     console.log(selectedBrewery);
-    //     // console.log(selectedBrewery.reviews)
-    //     if (selectedBrewery) {
-    //       setReviews(selectedBrewery.reviews);
-    //       selectedBrewery.reviews.map(review => {
-    //         dispatch(addReview(review))
-    //       })
-    //     }
-    //   });
   }
 
   function handleCheck() {
-    console.log("remove", wishlistBrewery);
     fetch(`/wishlist_breweries/${wishlistBrewery.id}`, {
       method: "DELETE"
     })
-    //need to update state!!
     .then(data => {
         console.log(wishlistBrewery)
         removeFromBucketlist(wishlistBrewery)

@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "./usersSlice";
 
-
-
 function Navigation() {
 
   let navigate = useNavigate()
@@ -25,7 +23,6 @@ function Navigation() {
       .then((r) => r.json())
       .then((data) => {
         if (data.data.email) {
-          console.log(data.data.email);
           setUser(data.data.email)
         } else {
           console.log("error", data);
@@ -50,9 +47,6 @@ function Navigation() {
     .then(console.log('test'))
     navigate(`/`)
   }
-
-  console.log(user)
-  console.log(userInRedux)
 
   return (
     <>

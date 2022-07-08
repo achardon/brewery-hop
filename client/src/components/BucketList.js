@@ -9,15 +9,10 @@ import { addWish, removeWish } from "./wishesSlice";
 
 function BucketList() {
 
-  // const breweries = useSelector((state) => state.breweries);
-  // text about having to be signed in
-
   const [breweries, setBreweries] = useState([])
   const [error, setError] = useState('')
-  console.log(breweries)
 
   const wishesInRedux = useSelector((state) => state.wishes)
-  console.log(wishesInRedux)
 
   const dispatch = useDispatch();
 
@@ -29,7 +24,6 @@ function BucketList() {
         r.json().then(data => {
           setBreweries(data)
           data.map(wish => {
-            console.log(wish)
             dispatch(addWish(wish))
           })
         })
@@ -41,9 +35,7 @@ function BucketList() {
   }, [])
 
   function removeFromBucketlist(wish) {
-    console.log('removed in bucketlist')
     dispatch(removeWish(wish))
-    console.log(wishesInRedux)
   }
 
   return (
