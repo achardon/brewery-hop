@@ -11,8 +11,8 @@ function About() {
 
   return (
     <Container style={{ padding: "40px", color: "white", fontWeight: "bold"}}>
-      <h1>About</h1>
-      <p>
+      <h1 style={{color: "chocolate"}}>About</h1>
+      <p style={{color: "cornsilk"}}>
         This app allows you to find a brewery anywhere you go! Go to
         the 'Search Breweries' tab to enter any city in the U.S. Once you search a city, you will see a list of all the breweries in that city, as well as pins on the map to show you where
         they are. To use the 'Bucket List' feature, or to leave a review for a
