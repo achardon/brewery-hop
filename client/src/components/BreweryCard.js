@@ -16,7 +16,6 @@ function BreweryCard( {brewery} ) {
   const [currentBrewery, setCurrentBrewery] = useState(null)
   
   const reviewsInRedux = useSelector((state) => state.reviews);
-  // console.log(reviewsInRedux);
 
   const dispatch = useDispatch()
 
@@ -47,7 +46,6 @@ function BreweryCard( {brewery} ) {
   // }, [])
 
   console.log(currentBrewery)
-  // console.log(currentBrewery.name);
 
   function handleReviews() {
     setShowReviews(!showReviews)
@@ -65,8 +63,6 @@ function BreweryCard( {brewery} ) {
           });
         }
       });
-
-
 
     //need to make brewery id dynamic after figuring out how to get id from database (not from API!)
     // fetch(`/breweries/7/reviews`)
@@ -118,15 +114,11 @@ function BreweryCard( {brewery} ) {
           <Card.Subtitle className="mb-2 text-muted">
             {brewery.street ? address(brewery) : "No address available"}
           </Card.Subtitle>
-          {/* <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text> */}
           <Card.Link href={brewery.website_url} style={{ marginTop: 100 }}>
             Visit Website
           </Card.Link>
           <br />
-          <Button variant="info" size="sm" onClick={handleReviews}>
+          <Button variant="info" size="sm" onClick={handleReviews} style={{backgroundColor: "cornsilk"}}>
             {showReviews ? "Hide Reviews" : "Read Reviews"}
           </Button>
           <Button
@@ -136,7 +128,7 @@ function BreweryCard( {brewery} ) {
             style={{
               marginLeft: 85,
               padding: "10px",
-              backgroundColor: "white",
+              backgroundColor: "chocolate",
             }}
           >
             💛

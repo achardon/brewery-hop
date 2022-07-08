@@ -12,7 +12,7 @@ function Signup({ setUser }) {
     password_confirmation: "",
   });
 
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState('');
   const [showErrors, setShowErrors] = useState(true);
 
   let navigate = useNavigate();
@@ -38,8 +38,11 @@ function Signup({ setUser }) {
         r.json().then((data) => setUser(data));
         navigate(`/`);
       } else {
-        r.json().then((error) => setErrors(error.errors));
-        setShowErrors(true);
+        r.json().then((error) => {
+          setErrors(error.status.message)
+          console.log(error.status.message)
+          setShowErrors(true)
+        })
       }
     });
   }
@@ -49,7 +52,7 @@ function Signup({ setUser }) {
       <h1>Create Account</h1>
 
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3 w-50" controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="text"
@@ -60,7 +63,7 @@ function Signup({ setUser }) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3 w-50" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -70,7 +73,10 @@ function Signup({ setUser }) {
             value={form.password}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPasswordConfirmation">
+        <Form.Group
+          className="mb-3 w-50"
+          controlId="formBasicPasswordConfirmation"
+        >
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
@@ -82,23 +88,27 @@ function Signup({ setUser }) {
         </Form.Group>
 
         <div>
-          {errors && showErrors
-            ? errors.map((error) => {
-                return (
+          {errors && showErrors ? 
+            // errors.map((error) => {
+                // return (
                   <Alert
                     variant="danger"
-                    key={error}
+                    key={errors}
                     onClose={() => setShowErrors(false)}
                     dismissible
                   >
-                    <p>{error}</p>
+                    <p>{errors}</p>
                   </Alert>
-                );
-              })
+                // );
+              // })
             : null}
         </div>
 
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+          style={{ backgroundColor: "chocolate" }}
+        >
           Create Account
         </Button>
       </Form>

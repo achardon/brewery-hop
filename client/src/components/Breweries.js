@@ -13,6 +13,7 @@ function Breweries() {
   const [breweries, setBreweries] = useState("");
   const [newSearch, setNewSearch] = useState(false);
   const [userBreweries, setUserBreweries] = useState([]);
+  const [showResults, setShowResults] = useState(false);
 
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -152,6 +153,7 @@ function Breweries() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setShowResults(true)
     setBreweries("");
     // setNewSearch(!newSearch);
     const city = search.toLowerCase();
@@ -170,12 +172,12 @@ function Breweries() {
   }
 
   return (
-    <>
+    <div style={{backgroundColor: "moccasin"}}>
       <div style={{ padding: "0px" }}>
         <div
           ref={mapContainer}
           className="map-container"
-          style={{ height: "600px" }}
+          style={{ height: "750px" }}
         />
       </div>
       <form onSubmit={handleSubmit} style={{padding: "10px", textAlign: "center"}}>
@@ -194,7 +196,7 @@ function Breweries() {
       {/* <h1>Search Breweries By City</h1> */}
       <br />
       <br />
-      <h1>Results</h1>
+      <h1 style={{textAlign: "center"}}>{showResults ? "Results" : null}</h1>
       <div className="d-flex flex-wrap">
         <Container>
           <Col>
@@ -205,7 +207,7 @@ function Breweries() {
         </Container>
       </div>
     {/* </Container> */}
-  </>
+  </div>
   )
 }
 

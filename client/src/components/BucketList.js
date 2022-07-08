@@ -30,7 +30,7 @@ function BucketList() {
 
   return (
     <Container style={{ padding: "40px" }}>
-      <h1>Brewery Bucket List</h1>
+      <h1 style={{color: "cornsilk"}}>Brewery Bucket List</h1>
       <br />
       <h3 style={{ color: "red" }}>{error}</h3>
       <div>

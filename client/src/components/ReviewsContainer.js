@@ -46,7 +46,7 @@ function ReviewsContainer( {reviews, brewery} ) {
             return (
               <Card.Text key={review.id}>
                 {/* <div style={{ marginLeft: "10px" }}> */}
-                  <li style={{ marginLeft: "10px" }}>{review.comment}</li>
+                <li style={{ marginLeft: "10px" }}>{review.comment}</li>
                 {/* </div> */}
               </Card.Text>
             );
@@ -56,7 +56,11 @@ function ReviewsContainer( {reviews, brewery} ) {
         )}
       </div>
       <div style={{ marginTop: "10px" }}>
-        <Button size="sm" onClick={handleClick}>
+        <Button
+          size="sm"
+          onClick={handleClick}
+          style={{ backgroundColor: "chocolate" }}
+        >
           Add Review
         </Button>
         {addReview ? (

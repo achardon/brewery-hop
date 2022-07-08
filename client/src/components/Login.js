@@ -13,7 +13,7 @@ function Login() {
     password: "",
   });
 
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState('');
   const [showErrors, setShowErrors] = useState(true);
 
   const user = useSelector(state => state.users)
@@ -69,7 +69,7 @@ function Login() {
         navigate(`/`);
       } else {
         r.json().then((error) => {
-          setErrors([error.error]);
+          setErrors("Incorrect username or password.");
           setShowErrors(true);
         });
       }
@@ -81,7 +81,7 @@ function Login() {
       <h1>Login</h1>
 
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicUsername">
+        <Form.Group className="mb-3 w-50" controlId="formBasicUsername">
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="text"
@@ -92,7 +92,7 @@ function Login() {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3 w-50" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -103,29 +103,37 @@ function Login() {
           />
         </Form.Group>
         <div>
-          {errors && showErrors
-            ? errors.map((error) => {
-                return (
+          {errors && showErrors ? 
+            // errors.map((error) => {
+            //     return (
                   <Alert
                     variant="danger"
-                    key={error}
+                    key={errors}
                     onClose={() => setShowErrors(false)}
                     dismissible
                   >
-                    <p>{error}</p>
+                    <p>{errors}</p>
                   </Alert>
-                );
-              })
+                // );
+              // })
             : null}
         </div>
-        <Button variant="success" type="submit">
+        <Button
+          variant="success"
+          type="submit"
+          style={{ backgroundColor: "chocolate" }}
+        >
           Log In
         </Button>
       </Form>
 
-      <Container style={{ padding: "40px" }} className="text-center">
-        <h3 style={{ padding: "10px" }}>Don't have an account?</h3>
-        <Button onClick={handleCreateAccount} variant="success">
+      <Container style={{ padding: "10px", marginLeft: "220px" }}>
+        <h3>Don't have an account?</h3>
+        <Button
+          onClick={handleCreateAccount}
+          variant="success"
+          style={{ backgroundColor: "chocolate" }}
+        >
           Create Account
         </Button>
       </Container>

@@ -69,16 +69,27 @@ function Navigation() {
           <Navbar.Collapse className="justify-content-end">
             {userInRedux.email || user ? (
               <Navbar.Text>
-                Signed in as: <a href="#login">{userInRedux.email? userInRedux.email : user}</a>
+                Signed in as:{" "}
+                <a href="#login">
+                  {userInRedux.email ? userInRedux.email : user}
+                </a>
               </Navbar.Text>
             ) : null}
             <div style={{ padding: "10px" }}>
               {userInRedux.email || user ? (
-                <Button variant="success" onClick={handleLogOut}>
+                <Button
+                  variant="success"
+                  onClick={handleLogOut}
+                  style={{ backgroundColor: "chocolate" }}
+                >
                   Log Out
                 </Button>
               ) : (
-                <Button variant="success" onClick={handleLogIn}>
+                <Button
+                  variant="success"
+                  onClick={handleLogIn}
+                  style={{ backgroundColor: "chocolate" }}
+                >
                   Log In
                 </Button>
               )}
