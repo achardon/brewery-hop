@@ -45,7 +45,7 @@ function BreweryCard( {brewery} ) {
   //     });
   // }, [])
 
-  console.log(currentBrewery)
+  console.log(brewery)
 
   function handleReviews() {
     setShowReviews(!showReviews)

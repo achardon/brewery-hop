@@ -7,9 +7,7 @@ import { addReview, removeAllReviews } from "./reviewsSlice";
 
 function ReviewsContainer( {reviews, brewery} ) {
   const [addReview, setAddReview] = useState(false);
-  // console.log(reviews)
 
-  //THIS WORKS NOW IN BUCKET LIST BUT NOT IN BREWERY SEARCH TAB because brewery being passed is from API not from database, so the brewery id is wrong
   const [breweryToUse, setBreweryToUse] = useState(brewery)
 
   useEffect(() => {
