@@ -12,7 +12,17 @@ import Signup from "./Signup";
 function App() {
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ 
+        backgroundColor: "sienna",
+        // backgroundImage: `url("https://www.piedmont.org/media/BlogImages/iStock_000049664402_470x260.jpg")`,
+        backgroundImage: `url("https://www.eatthis.com/wp-content/uploads/sites/4/2022/02/Beer-flight.jpg?quality=82&strip=1")`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100%",
+        height: "1000px",
+      }}
+    >
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />}></Route>
